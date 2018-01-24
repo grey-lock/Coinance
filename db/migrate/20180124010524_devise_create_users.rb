@@ -4,9 +4,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
       
-      t.float :deposit_amount
-      t.float :net_value
-      t.float :updated_net_value
+      t.float :deposit_amount, default: 0.0
+      t.float :net_value, default: 0.0
       t.string :name
       t.string :provider
       t.string :uid
