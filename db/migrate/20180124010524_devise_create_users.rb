@@ -3,10 +3,13 @@
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
+      
       t.float :deposit_amount
       t.float :net_value
       t.float :updated_net_value
-      
+      t.string :name
+      t.string :provider
+      t.string :uid
       
       ## Database authenticatable
       t.string :email,              null: false, default: ""

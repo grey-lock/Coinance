@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 20180124010524) do
     t.float "deposit_amount"
     t.float "net_value"
     t.float "updated_net_value"
+    t.string "name"
+    t.string "provider"
+    t.string "uid"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
