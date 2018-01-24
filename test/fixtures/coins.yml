@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  last_known_value: 1.5
+  symbol: MyString
+
+two:
+  name: MyString
+  last_known_value: 1.5
+  symbol: MyString

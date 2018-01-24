@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :coins
   resources :transactions
   resources :wallets
   root 'home#home'
