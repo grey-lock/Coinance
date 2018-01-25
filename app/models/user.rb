@@ -1,4 +1,8 @@
-class User < ApplicationRecord # Should this be ActiveRecord::Base?
+class User < ApplicationRecord
+  has_many :coins, through: :transactions
+  has_many :transactions
+  has_many :wallets
+  
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
