@@ -6,7 +6,7 @@
       <%= link_to "Manage", user_path(current_user), class: "navbar-brand" %>
       <%= link_to "Transactions", user_transactions_path(current_user), class: "navbar-brand" %>
       <%= link_to "Wallets", user_wallets_path(current_user), class: "navbar-brand" %>
-      <%= link_to "Coins", user_coins_path(current_user), class: "navbar-brand" %>
+      <%= link_to "Coins", coins_path(current_user), class: "navbar-brand" %>
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "navbar-brand" %>
     <% else  %>
       <%= link_to "Sign In", new_user_session_path, id: "Sign In", class: "navbar-brand" %>
