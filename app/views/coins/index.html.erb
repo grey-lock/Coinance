@@ -1,0 +1,12 @@
+<h1>Coin Index Page</h1>
+
+<ul>
+  <li>
+    Last BTC Price: $<%= CryptocompareApi.price_from_to("BTC","USD") %>
+  </li>  
+  <li>
+    Last ETH Price: $<%= CryptocompareApi.price_from_to("ETH", "USD") %>
+  </li>  <li>
+    Last LTC Price: $<%= CryptocompareApi.price_from_to("LTC", "USD") %>
+  </li>
+</ul>

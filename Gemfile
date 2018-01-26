@@ -38,6 +38,7 @@ gem 'dotenv-rails'
 gem 'cryptocompare'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'awesome_print'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
