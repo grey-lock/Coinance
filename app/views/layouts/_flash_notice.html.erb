@@ -1,5 +1,7 @@
 <div class="notice, container" id="flash-notice">
-  <%= content_tag(:div, flash[:error], class: "alert alert-dismissible alert-danger") if flash[:error] %>
+  <p>
+  <%= content_tag(:div, flash[:error], class: "alert alert-dismissible alert-warning") if flash[:error] %>
   <%= content_tag(:div, flash[:notice], class: "alert alert-dismissible alert-success") if flash[:notice] %>
-  <%= content_tag(:div, flash[:alert], class: "alert alert-dismissible alert-warning") if flash[:alert] %>
+  <%= content_tag(:div, flash[:alert], class: "alert alert-dismissible alert-danger") if flash[:alert] %>
+  </p>
 </div>
