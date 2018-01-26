@@ -6,7 +6,11 @@
   </li>  
   <li>
     Last ETH Price: $<%= CryptocompareApi.price_from_to("ETH", "USD") %>
-  </li>  <li>
+  </li>
+  <li>
     Last LTC Price: $<%= CryptocompareApi.price_from_to("LTC", "USD") %>
   </li>
+    <%= CryptocompareApi.list_all_coin_symbols.collect do |crypto| %>
+      <%= content_tag :li, crypto %>
+    <% end %>
 </ul>
