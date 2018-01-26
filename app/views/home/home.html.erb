@@ -1,9 +1,10 @@
 <div class="jumbotron">
-  <h1 class="display-5">Welcome to Coinance.</h1>
+  <h1 class="display-4">Welcome to Coinance</h1>
   <p class="lead">The most refined digital currency asset management tool.</p>
   <hr class="my-4">
-  <p>Start tracking your cryptocurrency assets.</p>
+  <p>Start tracking your cryptocurrency assets now.</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg", role: "button" if !user_signed_in? %>
+    <%= link_to "Manage", user_path(current_user), class: "btn btn-primary btn-lg", role: "button" if user_signed_in? %>
   </p>
 </div>
