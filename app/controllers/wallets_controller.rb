@@ -17,10 +17,11 @@ class WalletsController < ApplicationController
     
     if @wallet.valid?
       @wallet.save
-      flash[:notice] = "Wallet added!"
+      flash[:notice] = "Wallet successfully created!"
       redirect_to user_wallets_path
     else
-      render user_wallets_path
+      flash[:alert] = "Wallet failed to create!"
+      render :new
     end
   end
   

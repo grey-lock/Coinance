@@ -1,4 +1,4 @@
-<%= form_for :wallet do |f| %>
+<%= form_for :wallet, url: {action: action} do |f| %>
   <%= f.label "Wallet Name" %>
   <%= f.text_field :name %>
   <%= f.label "Coin Amount" %>
