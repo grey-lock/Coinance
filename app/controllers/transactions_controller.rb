@@ -1,18 +1,29 @@
 class TransactionsController < ApplicationController
-  before_action :set_user_tx
   
   def index
     @transactions = current_user.transactions
   end
   
   def show
-    
+    set_tx
+  end
+  
+  def new
+    @transaction = Transaction.new
+  end
+  
+  def create
+  
   end
   
   private
   
-  def set_user_tx
+  def set_tx
     @transaction = Transaction.find_by(id: params[:id])
+  end
+  
+  def transaction_params
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id)
   end
   
 end
