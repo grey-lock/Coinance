@@ -30,12 +30,10 @@ ActiveRecord::Schema.define(version: 20180124232110) do
     t.float "fee", default: 0.0
     t.bigint "user_id"
     t.bigint "coin_id"
-    t.bigint "wallet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["coin_id"], name: "index_transactions_on_coin_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
-    t.index ["wallet_id"], name: "index_transactions_on_wallet_id"
   end
 
   create_table "users", force: :cascade do |t|
