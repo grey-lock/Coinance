@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Coins
+Coin.create(name: 'Bitcoin', symbol: 'BTC', last_known_value: CryptocompareApi.price_from_to('BTC', 'USD'))
+Coin.create(name: 'Litecoin', symbol: 'LTC', last_known_value: CryptocompareApi.price_from_to('LTC', 'USD'))
+Coin.create(name: 'Ethereum', symbol: 'ETH', last_known_value: CryptocompareApi.price_from_to('ETH', 'USD'))
+
+# Users
+
+
+# Transactions
+
