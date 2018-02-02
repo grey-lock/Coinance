@@ -1,0 +1,14 @@
+<%= form_for :transaction do |f| %>
+  <%= f.label "Transaction Name" %>
+  <%= f.text_field :name %>
+  <%= f.label "Amount" %>
+  <%= f.number_field :amount %>
+  <%= f.label "Quantity" %>
+  <%= f.number_field :quantity %>
+  <%= f.label "Price Per Coin (in fiat)" %>
+  <%= f.number_field :price_per_coin %>
+  <%= f.label "Exchange fee (if any)" %>
+  <%= f.number_field :fee %>
+  
+  <%= f.submit "Create Transaction" %>
+<% end %>
