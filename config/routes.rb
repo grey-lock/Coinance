@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   
   # Use nested resource so only current_user can view their wallets, transactions
   resources :users, only: [:show] do
-    resources :transactions
     resources :wallets
+    resources :transactions
   end
   
   root 'home#home'

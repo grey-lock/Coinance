@@ -1,0 +1,11 @@
+<%= form_for :wallet do |f| %>
+  <%= f.label "Wallet Name" %>
+  <%= f.text_field :name %>
+  <%= f.label "Coin Amount" %>
+  <%= f.text_field :coin_amount %>
+  <%= f.label "User Deposit" %>
+  <%= f.text_field :user_deposit %>
+  
+  
+  <%= f.submit "Create Wallet", name: "wallet[submit]" %>
+<% end %>

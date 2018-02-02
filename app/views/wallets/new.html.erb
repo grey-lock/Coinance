@@ -5,6 +5,7 @@
   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
   <p class="lead">
     
+    <%= render partial: 'form', locals: {wallet: @wallet} %>
     <!--This needs to create a wallet and then redirect to a new transaction-->
     <%= link_to "Create Wallet", new_user_wallet_path, class: "btn btn-primary btn-lg", role: "button" %>
   </p>
