@@ -1,9 +1,23 @@
 <div class="jumbotron">
   <h1 class="display-4">Your Transactions</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <% if current_user && !current_user.transactions.empty? %>
+    <hr class="my-4">
+    <div class="list-group">
+    <% current_user.transactions.each do |tx| %>
+      <%= link_to users_transaction_path(current_user), class: "list-group-item" do %>
+        <h3 class="pull-right"><small class="text-uppercase">created </small><%= tx.created_at.to_time %></h3>
+        <h2 class="h3"><small> <%= tx.amount %></small></h2>
+        <h4> <%= tx.quantity %></h4>
+        <h4> <%= tx.price_per_coin %></h4>
+        <h4> <%= tx.fee %></h4>
+       <% end %>
+    <% end %>
+    </div>
+  <% else %>
+    <hr class="my-4">
+    <p class="lead">You have not created any transactions. Please add a new transaction below.</p>
+  <% end %>
   <p class="lead">
-    <%= link_to "Add A New Transaction", new_user_transaction_path, class: "btn btn-primary btn-lg", role: "button" %>
+    <%= link_to "Add A New Transaction", new_user_transaction_path(current_user), class: "btn btn-primary btn-lg", role: "button" if current_user %>
   </p>
 </div>
