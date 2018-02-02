@@ -18,6 +18,7 @@ class WalletsController < ApplicationController
     if @wallet.valid?
       @wallet.save
       flash[:notice] = "Wallet added!"
+      redirect_to user_wallets_path
     else
       render user_wallets_path
     end
