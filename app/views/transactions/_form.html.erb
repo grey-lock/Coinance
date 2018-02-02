@@ -1,6 +1,4 @@
-<%= form_for :transaction do |f| %>
-  <%= f.label "Transaction Name" %>
-  <%= f.text_field :name %>
+<%= form_for transaction, url: {action: action} do |f| %>
   <%= f.label "Amount" %>
   <%= f.number_field :amount %>
   <%= f.label "Quantity" %>
