@@ -1,4 +1,5 @@
 <%= form_for transaction, url: {action: action} do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.label "Amount" %>
   <%= f.number_field :amount %>
   <%= f.label "Quantity" %>

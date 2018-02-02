@@ -13,7 +13,8 @@ class TransactionsController < ApplicationController
   end
   
   def create
-  
+    @transaction = current_user.transactions.build(transaction_params)
+    
   end
   
   private
