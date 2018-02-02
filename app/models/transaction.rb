@@ -6,6 +6,6 @@ class Transaction < ApplicationRecord
   # belongs_to :wallet, optional: true
   
   validates :amount, :quantity, :price_per_coin, numericality: { greater_than: 0 }
-  validates :fee, presence: true
+  validates :fee, numericality: { greater_than: 0 }, optional: true
   
 end

@@ -16,3 +16,6 @@ Coin.create(name: 'Ethereum', symbol: 'ETH', last_known_value: CryptocompareApi.
 
 # Transactions
 
+# Wallets
+
+User.first.wallets.create(name: "BTC Portfolio", coin_amount: 5, user_amount: 500, net_value: 500, coin_id: 1, user_id: 1)
