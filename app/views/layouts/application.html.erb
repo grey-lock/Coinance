@@ -6,6 +6,13 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setTimeout(function(){
+        $('#flash-notice').fadeOut();
+        }, 3000);
+      })
+    </script>
   </head>
 
   <body>

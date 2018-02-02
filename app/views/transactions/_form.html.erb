@@ -1,13 +1,15 @@
 <%= form_for transaction, url: {action: action} do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  
   <%= f.label "Amount" %>
-  <%= f.number_field :amount %>
+  <%= f.number_field :amount %><br>
   <%= f.label "Quantity" %>
-  <%= f.number_field :quantity %>
+  <%= f.number_field :quantity %><br>
   <%= f.label "Price Per Coin (in fiat)" %>
-  <%= f.number_field :price_per_coin %>
+  <%= f.number_field :price_per_coin %><br>
   <%= f.label "Exchange fee (if any)" %>
   <%= f.number_field :fee %>
+  
+  <%= f.hidden_field :user_id, value: current_user.id %><br>
   
   <%= f.submit "Create Transaction" %>
 <% end %>

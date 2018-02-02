@@ -4,7 +4,7 @@
     <hr class="my-4">
     <div class="list-group">
     <% current_user.transactions.each do |tx| %>
-      <%= link_to users_transaction_path(current_user), class: "list-group-item" do %>
+      <%= link_to user_transaction_path(current_user, @transactions), class: "list-group-item" do %>
         <h3 class="pull-right"><small class="text-uppercase">created </small><%= tx.created_at.to_time %></h3>
         <h2 class="h3"><small> <%= tx.amount %></small></h2>
         <h4> <%= tx.quantity %></h4>
@@ -17,7 +17,8 @@
     <hr class="my-4">
     <p class="lead">You have not created any transactions. Please add a new transaction below.</p>
   <% end %>
+  <hr class="my-4">
   <p class="lead">
-    <%= link_to "Add A New Transaction", new_user_transaction_path(current_user), class: "btn btn-primary btn-lg", role: "button" if current_user %>
+    <%= link_to "Add A New Transaction", new_user_transaction_path(current_user, @transaction), class: "btn btn-primary btn-lg", role: "button" if current_user %>
   </p>
 </div>
