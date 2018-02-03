@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
     <script type="text/javascript">
       $(document).ready(function(){
         setTimeout(function(){
@@ -13,14 +14,17 @@
         }, 3000);
       })
     </script>
+    
   </head>
 
   <body>
     <%= render 'layouts/header' %>
 
     <%= render 'layouts/flash_notice' %>
+    
     <div class="container">
       <%= yield %>
     </div>
+    
   </body>
 </html>

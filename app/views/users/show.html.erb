@@ -1,7 +1,25 @@
-<h1><%= current_user.email %> Account Show page</h1>
+<% if current_user %>
 
-<h2><%= current_user.email %> Stats</h2>
+<h1>Your Portfolio</h1>
 
-<h2><%= current_user.email %> Transactions</h2>
+<div class="list-group">
+  <a href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Your Transactions</h5>
+      <small class="text-muted">Last Updated: <%= current_user.transactions.last.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small>
+    </div>
+    <p class="mb-1">maybe some tx info here</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+  <br>
+  <a href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Your Wallets</h5>
+      <small class="text-muted">Last Updated: <%= current_user.wallets.last.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small>
+    </div>
+    <p class="mb-1">maybe some walelt info here</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+</div>
 
-<h2><%= current_user.email %> Wallets</h2>
+<% end %>

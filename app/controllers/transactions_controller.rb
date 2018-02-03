@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
       flash[:message] = "Transaction successfully created."
       redirect_to user_transactions_path(current_user)
     else
-       flash[:alert] = "Transaction failed to save."
+      flash[:alert] = "Transaction failed to save."
       redirect_to new_user_transaction_path(current_user)
     end
   end
