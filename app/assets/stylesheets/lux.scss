@@ -1966,11 +1966,11 @@ pre code {
 }
 
 .form-control {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 2rem;
+  display: inline;
+  width: 25%;
+  // padding: 0.75rem 2rem;
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.0;
   color: #55595c;
   background-color: #f7f7f9;
   background-clip: padding-box;

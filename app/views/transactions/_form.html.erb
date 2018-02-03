@@ -1,15 +1,15 @@
-<%= form_for transaction, url: {action: action} do |f| %>
+<%= form_for transaction, url: {action: action}, class: "form-group" do |f| %>
   
-  <%= f.label "Amount" %>
-  <%= f.number_field :amount %><br>
-  <%= f.label "Quantity" %>
-  <%= f.number_field :quantity %><br>
-  <%= f.label "Price Per Coin (in fiat)" %>
-  <%= f.number_field :price_per_coin %><br>
-  <%= f.label "Exchange fee (if any)" %>
-  <%= f.number_field :fee %>
+  <%= f.label "Amount", class: "col-form-label" %>
+  <%= f.number_field :amount, class: "form-control" %><br>
+  <%= f.label "Quantity", class: "col-form-label"  %>
+  <%= f.number_field :quantity, class: "form-control" %><br>
+  <%= f.label "Price Per Coin (in fiat)", class: "col-form-label"  %>
+  <%= f.number_field :price_per_coin, class: "form-control" %><br>
+  <%= f.label "Exchange fee (if any)", class: "col-form-label"  %>
+  <%= f.number_field :fee, class: "form-control" %><br>
   
-  <%= f.hidden_field :user_id, value: current_user.id %><br>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   
-  <%= f.submit "Create Transaction" %>
+  <%= f.submit "Create Transaction", class: "btn btn-primary" %>
 <% end %>
