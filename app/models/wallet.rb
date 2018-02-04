@@ -5,6 +5,9 @@ class Wallet < ApplicationRecord
   # Removing this association for now due to complexity of models
   # has_many :transactions
   
+  validates :name, presence: true
+  validates :coin_amount, :user_deposit, :net_value, numericality: { greater_than: 0 }
+  
   def wallet_params=(wallet_params)
     @wallet_params = wallet_params
   end
