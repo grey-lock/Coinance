@@ -32,7 +32,8 @@ Specs:
   - users/1/transactions, users/2/wallets
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
   - users/1/transactions/new, users/2/wallets/new
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
+  - Forms display errors for invalid user submission
 
 Confirm:
 - [x] The application is pretty DRY
