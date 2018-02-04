@@ -5,7 +5,7 @@
     <div class="list-group">
     <% current_user.transactions.each do |tx| %>
       <%= link_to user_transaction_path(current_user, @transactions), class: "list-group-item" do %>
-        <h3 class="pull-right"><small class="text-uppercase">created </small><%= tx.created_at.to_time %></h3>
+        <h3 class="pull-right"><small class="text-uppercase">created </small><%= tx.created_at.strftime("%A, %d %b %Y %l:%M %p") %></h3>
         <h2 class="h3"><small> <%= tx.amount %></small></h2>
         <h4> <%= tx.quantity %></h4>
         <h4> <%= tx.price_per_coin %></h4>
