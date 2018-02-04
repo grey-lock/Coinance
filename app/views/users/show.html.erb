@@ -6,16 +6,22 @@
   <a href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Transactions</h5>
+      <% if current_user.transactions.any? %>
       <small class="text-muted">Last Updated: <%= current_user.transactions.last.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small>
+      <% end %>
     </div>
     <p class="mb-1">maybe some tx info here</p>
     <small class="text-muted">Donec id elit non mi porta.</small>
   </a>
+  
   <br>
+  
   <a href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Wallets</h5>
+      <% if current_user.wallets.any? %>
       <small class="text-muted">Last Updated: <%= current_user.wallets.last.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small>
+      <% end %>
     </div>
     <p class="mb-1">maybe some walelt info here</p>
     <small class="text-muted">Donec id elit non mi porta.</small>
