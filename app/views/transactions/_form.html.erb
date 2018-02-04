@@ -1,5 +1,8 @@
 <%= form_for transaction, url: {action: action}, class: "form-group" do |f| %>
   
+  <%= f.label :coin_id, "Select Coin Type", class: "col-form-label" %>
+  <%= f.collection_select :coin_id, Coin.all, :id, :name, class: "custom-select" %><br>
+  
   <%= f.label "Amount", class: "col-form-label" %>
   <%= f.number_field :amount, class: "form-control" %><br>
   

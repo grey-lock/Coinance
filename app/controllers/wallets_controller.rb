@@ -11,6 +11,7 @@ class WalletsController < ApplicationController
   
   def new
     @wallet = Wallet.new
+    
   end
   
   def create
@@ -36,7 +37,7 @@ class WalletsController < ApplicationController
   
   # Require wallet params, as well as user_id & coin_id
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value)
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
   end
   
   
