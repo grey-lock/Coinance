@@ -23,7 +23,7 @@ class TransactionsController < ApplicationController
       flash[:success] = "Transaction successfully added!"
       redirect_to user_transactions_path(current_user)
     else
-      flash[:alert] = "Transaction failed to save. Did you enter valid values?"
+      flash[:alert] = @wallet.errors.full_messages.to_sentence
       redirect_to new_user_transaction_path(current_user)
     end
   end

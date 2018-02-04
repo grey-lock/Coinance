@@ -6,7 +6,7 @@ class Wallet < ApplicationRecord
   # has_many :transactions
   
   validates :name, presence: true
-  validates :coin_amount, :user_deposit, :net_value, numericality: { greater_than: 0 }
+  validates :coin_amount, :user_deposit, numericality: { greater_than: 0 }
   
   def wallet_params=(wallet_params)
     @wallet_params = wallet_params

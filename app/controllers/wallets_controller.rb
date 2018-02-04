@@ -23,7 +23,7 @@ class WalletsController < ApplicationController
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
     else
-      flash[:alert] = "Wallet failed to save. Did you enter valid values?"
+      flash[:alert] = @wallet.errors.full_messages.to_sentence
       redirect_to new_user_wallet_path(current_user)
     end
   end
@@ -37,7 +37,7 @@ class WalletsController < ApplicationController
   
   # Require wallet params, as well as user_id & coin_id
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id)
   end
   
   
