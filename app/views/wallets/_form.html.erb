@@ -3,9 +3,9 @@
   <%= f.label "Wallet Name", class: "col-form-label" %>
   <%= f.text_field :name, class: "form-control" %><br>
   <%= f.label "Coin Amount", class: "col-form-label" %>
-  <%= f.text_field :coin_amount, class: "form-control" %><br>
+  <%= f.number_field :coin_amount, class: "form-control" %><br>
   <%= f.label "User Deposit", class: "col-form-label" %>
-  <%= f.text_field :user_deposit, class: "form-control" %><br>
+  <%= f.number_field :user_deposit, class: "form-control" %><br>
   
   <%= f.hidden_field :user_id, value: current_user.id %><br>
   
