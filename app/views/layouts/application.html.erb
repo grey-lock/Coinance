@@ -6,14 +6,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
-    <script type="text/javascript">
-      $(document).ready(function(){
+    <%= javascript_tag "$(document).ready(function(){
         setTimeout(function(){
         $('#flash-notice').fadeOut();
-        }, 3000);
-      })
-    </script>
+        }, 5000);
+      })"
+    %>
     
   </head>
 
