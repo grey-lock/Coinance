@@ -7,14 +7,14 @@
     <div class="list-group">
       
     <% current_user.wallets.each do |wallet| %>
-      <%= link_to user_wallets_path(current_user, @wallets), class: "list-group-item" do %>
+      <%= link_to user_wallet_path(current_user, @wallets), class: "list-group-item" do %>
       
         <h3 class="pull-right"><small class="text-uppercase">created at: </small><%= wallet.created_at.strftime("%A, %d %b %Y %l:%M %p") %></h3>
   
-        <p class="mb-1"><%= wallet.name %></p>
-        <p class="mb-1"><%= wallet.coin_amount %></p>
-        <p class="mb-1"><%= wallet.user_deposit %></p>
-        <p class="mb-1"><%= wallet.net_value %></p>
+        <p class="mb-1">Wallet name: <%= wallet.name %></p>
+        <p class="mb-1">Coin Amount: <%= wallet.coin_amount %></p>
+        <p class="mb-1">Amount you deposited: <%= wallet.user_deposit %></p>
+        <p class="mb-1">Net value: <%= wallet.net_value %></p>
         
        <% end %>
     <% end %>
