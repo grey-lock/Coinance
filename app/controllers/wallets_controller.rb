@@ -11,16 +11,18 @@ class WalletsController < ApplicationController
   
   def new
     @wallet = Wallet.new
-    @coin = Coin.new
   end
   
   def create
     @wallet = current_user.wallets.build(wallet_params)
-    @wallet.coin = Coin.new(name: params[:coin])
+    @wallet.coin = Coin.new
+    @wallet.coin.name = params[:wallet][:coin].scan(/\w+(?!\w|\()/)[0]
+    @wallet.coin.symbol = params[:wallet][:coin].scan(/\w+(?!\w|\()/)[1]
     
-    @wallet.wallet_params = params[:wallet]
+    @wallet.coin.last_known_value = CryptocompareApi.last_known_value(params[:wallet][:coin].scan(/\w+(?!\w|\()/)[1])
+    
+    # @wallet.wallet_params = params[:wallet]
     if @wallet.valid?
-      raise @wallet.inspect
       @wallet.save
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
