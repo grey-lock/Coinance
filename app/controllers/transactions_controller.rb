@@ -15,8 +15,13 @@ class TransactionsController < ApplicationController
   end
   
   def create
+    # @transaction.transaction_params = params[:transaction]
     @transaction = current_user.transactions.build(transaction_params)
-    @transaction.transaction_params = params[:transaction]
+    @transaction.coin = Coin.new
+    @transaction.coin.name = params[:transaction][:coin].scan(/\w+(?!\w|\()/)[0]
+    @transaction.coin.symbol = params[:transaction][:coin].scan(/\w+(?!\w|\()/)[1]
+    
+    @transaction.coin.last_known_value = CryptocompareApi.last_known_value(params[:transaction][:coin].scan(/\w+(?!\w|\()/)[1]) if params[:coin]
     
     if @transaction.valid?
       @transaction.save

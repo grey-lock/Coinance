@@ -12,5 +12,10 @@ class Wallet < ApplicationRecord
     @wallet_params = wallet_params
   end
   
+  # Fix this once submitted
+  def net_value=
+    self.coin_amount * self.user_deposit
+  end
+  
   
 end
