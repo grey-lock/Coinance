@@ -19,7 +19,7 @@ class WalletsController < ApplicationController
     @wallet.coin.name = params[:wallet][:coin].scan(/\w+(?!\w|\()/)[0]
     @wallet.coin.symbol = params[:wallet][:coin].scan(/\w+(?!\w|\()/)[1]
     
-    @wallet.coin.last_known_value = CryptocompareApi.last_known_value(params[:wallet][:coin].scan(/\w+(?!\w|\()/)[1])
+    @wallet.coin.last_known_value = CryptocompareApi.last_known_value(params[:wallet][:coin].scan(/\w+(?!\w|\()/)[1]) if params[:coin]
     
     # @wallet.wallet_params = params[:wallet]
     if @wallet.valid?
