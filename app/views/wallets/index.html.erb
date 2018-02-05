@@ -12,7 +12,7 @@
         <h5 class="pull-right"><small class="text-muted"><%= wallet.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
   
         <p class="mb-1">Wallet name: <%= wallet.name %></p>
-        <p class="mb-1">Coin: <%= wallet.coin.name if wallet.coin %></p>
+        <p class="mb-1">Coin: <%= wallet.coin if wallet.coin %></p>
         <p class="mb-1">Coin Amount: <%= wallet.coin_amount %></p>
         <p class="mb-1">Amount you deposited: $<%= wallet.user_deposit %></p>
         <p class="mb-1">Net value: $<%= wallet.net_value %></p>
