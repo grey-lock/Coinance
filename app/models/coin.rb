@@ -6,7 +6,7 @@ class Coin < ApplicationRecord
   validates :name, :symbol, presence: true
 
   def self.all_coin_fullnames
-    Cryptocompare::CoinList.all['Data'].map { |arr|  arr[1].dig('FullName') }.sort
+    Cryptocompare::CoinList.all['Data'].map { |arr| arr[1].dig('FullName') }.sort
   end
   
   def self.all_coin_symbols
@@ -16,6 +16,5 @@ class Coin < ApplicationRecord
   def self.all_coin_names
     Cryptocompare::CoinList.all['Data'].map { |arr| arr[1].dig('CoinName') }
   end
-  
   
 end

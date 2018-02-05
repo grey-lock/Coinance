@@ -8,25 +8,19 @@ class CryptocompareApi < ApplicationRecord
     Cryptocompare::CoinList.all['Data'].keys
   end
   
-  def self.find_name(coin)
-    Cryptocompare::CoinList.all['Data']["#{coin}"]['CoinName']
+  def self.symbol(coinSym)
+    Cryptocompare::CoinList.all['Data']["#{coin.upcase}"]['Symbol']
   end
   
-  def self.symbol(coin)
-    Cryptocompare::CoinList.all['Data']["#{coin}"]['Symbol']
+  def self.find_coin_id(coinSym)
+    coin.downcase
+    Cryptocompare::CoinList.all['Data']["#{coin.upcase}"]['Id']
   end
   
-  def self.find_coin_id(coin)
-    Cryptocompare::CoinList.all['Data']["#{coin}"]['Id']
-  end
-  
-  def self.last_known_value(coin)
-    # Find the coin by symbol    
-    coinSym = CryptocompareApi.symbol(coin)
+  def self.last_known_value(coinSym)
     # Send the found coin symbol to the method for price conversion
-    if coinSym
-      CryptocompareApi.price_from_to(coinSym, 'USD')
-    end
+    coinSym.upcase
+    CryptocompareApi.price_from_to(coinSym, 'USD')
   end  
   
 end
