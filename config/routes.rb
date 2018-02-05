@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   
   root 'home#home'
   
-  get '/coins/most_transactions' => 'coins#show'
+  get '/coins/most_transactions' => 'coins#index'
  
   
 end
