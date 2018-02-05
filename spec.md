@@ -18,8 +18,8 @@ Specs:
   - Coin: validates name, symbol presence/uniqueness, User: validates email, passsword thru devise, Transaction: validates amount, fee, quantity, price_per_coin
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
   - 
-- [ ] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
-  -
+- [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
+  - transactions/new, Coin / wallets/new, Coin, all nested from user/1/
 - [x] Include signup (how e.g. Devise)
   - Devise works
 - [x] Include login (how e.g. Devise)

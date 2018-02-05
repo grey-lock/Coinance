@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   end
   
   root 'home#home'
+  
+  get '/coins/most_transactions' => 'coins#show'
  
   
 end

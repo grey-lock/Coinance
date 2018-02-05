@@ -25,4 +25,12 @@ class Coin < ApplicationRecord
     self.name.scan(/\w+(?!\w|\()/)[1]
   end
   
+  def self.most_transactions
+    coin_hash = {}
+      self.all.each do |coin|
+        coin_hash[coin.name] = coin.transactions.count
+      end
+    coin_hash.sort_by{|k, v| value}.reverse
+  end
+  
 end
