@@ -1,8 +1,8 @@
 <%= form_for wallet, url: {action: action}, html: {role: "form" }, class: "form-group" do |f| %>
   
-  <%= f.label :coin_id_name, "Select Coin", class: "col-form-label" %>
+  <%= f.label :coin, "Select Coin", class: "col-form-label" %>
   <!--Select a coin from the JSON array-->
-  <%= f.select :coin_id_name, Coin.all_coin_fullnames, class: "custom-select" %><br>
+  <%= f.select :coin, Coin.all_coin_names, class: "custom-select" %><br>
   
   <%= f.label "Wallet Name", class: "col-form-label" %>
   <%= f.text_field :name, class: "form-control" %><br>

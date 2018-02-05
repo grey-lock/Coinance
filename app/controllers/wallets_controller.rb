@@ -11,14 +11,16 @@ class WalletsController < ApplicationController
   
   def new
     @wallet = Wallet.new
+    @coin = Coin.new
   end
   
   def create
     @wallet = current_user.wallets.build(wallet_params)
-    @wallet.wallet_params = params[:wallet]
+    @wallet.coin = Coin.new(name: params[:coin])
     
-    @wallet.coin = params[:coin]
+    @wallet.wallet_params = params[:wallet]
     if @wallet.valid?
+      raise @wallet.inspect
       @wallet.save
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
@@ -37,7 +39,7 @@ class WalletsController < ApplicationController
   
   # Require wallet params, as well as user_id & coin_id
   def wallet_params
-    params.require(:wallet).permit(:name, :coin, :coin_amount, :user_deposit, :net_value, :coin_id)
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
   end
   
   
