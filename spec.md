@@ -16,10 +16,10 @@ Specs:
   - User can submit a wallet that has a name, coin_amount, user_deposit, and a net_value. The wallet has attributes and belongs to a specific user
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
   - Coin: validates name, symbol presence/uniqueness, User: validates email, passsword thru devise, Transaction: validates amount, fee, quantity, price_per_coin
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-  - 
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+  - coins/most_transactions
 - [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
-  - transactions/new, Coin / wallets/new, Coin, all nested from user/1/
+  - users/1/transactions/new, Coin, users/1/wallets/new, Coin
 - [x] Include signup (how e.g. Devise)
   - Devise works
 - [x] Include login (how e.g. Devise)
