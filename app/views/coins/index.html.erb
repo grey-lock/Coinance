@@ -9,8 +9,7 @@
   </li>
   <li>
     Last LTC Price: $<%= CryptocompareApi.price_from_to("LTC", "USD") %>
-  </li>
-    <%= CryptocompareApi.list_all_coin_symbols.collect do |crypto| %>
-      <%= content_tag :li, crypto %>
-    <% end %>
+  <ol>
+    <%= render partial: "coins/most_transactions", collection: @most_transactions, as: :transaction, locals: {last_tx: @most_transactions.last[0] } %>
+  </ol>
 </ul>
