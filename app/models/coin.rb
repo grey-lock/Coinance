@@ -30,7 +30,7 @@ class Coin < ApplicationRecord
       self.all.each do |coin|
         coin_hash[coin.name] = coin.transactions.count
       end
-    coin_hash.sort_by{|k, v| value}.reverse
+    coin_hash.sort_by{|k, v| v}.reverse
   end
   
 end
