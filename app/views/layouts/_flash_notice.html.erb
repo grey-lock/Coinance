@@ -1,4 +1,4 @@
-<div class="notice, container" id="flash-notice">
+<div class="notice container" id="flash-notice">
   <p>
   <%= content_tag(:div, flash[:message], class: "alert alert-dismissible alert-info") if flash[:message] %>
   <%= content_tag(:div, flash[:success], class: "alert alert-dismissible alert-success") if flash[:success] %>
