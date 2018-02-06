@@ -2,19 +2,19 @@
 
 Coinance is a Ruby on Rails web application that allows you to to manage a protfolio of your digital currency assets and investments.
 
-* Users can create an account to store data on transactions and wallets where they have made any cryptocurrency.
+* Users can create an account to store data on transactions and wallets where they have any cryptocurrencies.
 * Leverages the [Cryptocompare API](https://www.cryptocompare.com/api/) to retrieve real-time info & price data on 2,000+ cryptocurrencies and tokens.
 * Users can save a transaction or a wallet by selecting from a real-time list of digital currencies and tokens to save to the database.
 * Coins are selected in real-time, and persisted to the database as an associated coin to either a wallet, or a transaction.
 * Users can submit their own prices if purchased at a different time for their own transactions/wallets.
 * User sign-in, sign-out, and session security is handled with Devise [Devise](https://github.com/plataformatec/devise)
 * Users can log in with Facebook using [Omniauth](https://github.com/omniauth/omniauth)
-* Displays real-time price data on Bitcoin, Ethereum, and Litecoin
+* Displays updated price data on Bitcoin, Ethereum, and Litecoin on the Coin index page.
 * Displays stats on the Coins saved with the most transactions.
-* Users can ONLY create, read, update, or delete their OWN transactions and wallets.
-* All user data is validated using ActiveRecord/Rails model validations.
-* Database schema is created in PostgresQL
-* Styled custom SCSS with a base open-source [Bootstrap theme](https://bootswatch.com/lux/)
+* Users can ONLY create, read, update, or delete their own transactions and wallets.
+* All user data is validated using ActiveRecord ORM & Rails model validations.
+* Database schema is created in PostgresQL.
+* Styled custom SCSS with an open-source [Bootstrap theme](https://bootswatch.com/lux/).
 
 ## Installation
 
