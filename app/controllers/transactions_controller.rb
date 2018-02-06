@@ -5,8 +5,10 @@ class TransactionsController < ApplicationController
     @transactions = current_user.transactions
   end
   
+  # show is not pointing to the right location
   def show
-    @transaction = current_user.transactions.find_by(id: params[:id])
+    @transaction = Transaction.all.find_by(user_id: params[:user_id])
+    # binding.pry
   end
   
   def new
@@ -48,7 +50,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
+    params.require(:transaction).permit(:id, :amount, :quantity, :price_per_coin, :fee, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
   end
   
 end
