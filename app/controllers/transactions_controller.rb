@@ -53,9 +53,9 @@ class TransactionsController < ApplicationController
     @transaction.coin.update(name: coin_name)
     @transaction.coin.update(symbol: coin_symbol)
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
-  
-    @transaction.coin.update(last_known_value: coin_price) if coin_price
     
+    @transaction.coin.update(last_known_value: coin_price) if coin_price
+    binding.pry
     if @transaction.valid?
       @transaction.save
       flash[:success] = "Transaction successfully updated!"

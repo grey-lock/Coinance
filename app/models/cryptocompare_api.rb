@@ -1,7 +1,13 @@
 class CryptocompareApi < ApplicationRecord
+
   
   def self.price_from_to(crypto, fiat)
-    Cryptocompare::CoinSnapshot.find("#{crypto.upcase}","#{fiat.upcase}")['Data'].values[6]['PRICE'].to_f.round(2)
+    cryptoSym = crypto.upcase
+    if cryptoSym && Cryptocompare::CoinSnapshot.find(cryptoSym, fiat)['Response'] == "Success"
+      Cryptocompare::CoinSnapshot.find(cryptoSym,"#{fiat.upcase}")['Data'].values[6]['PRICE'].to_f.round(2)
+    else
+      nil
+    end
   end
   
   def self.list_all_coin_symbols
