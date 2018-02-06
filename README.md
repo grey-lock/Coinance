@@ -1,24 +1,83 @@
-# README
+# Coinance
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Coinance is a Ruby on Rails web application that allows you to to manage a protfolio of your digital currency assets and investments.
 
-Things you may want to cover:
+* Users can create an account to store data on transactions and wallets where they have made any cryptocurrency.
+* Leverages the [Cryptocompare API](https://www.cryptocompare.com/api/) to retrieve real-time info & price data on 2,000+ cryptocurrencies and tokens.
+* Users can save a transaction or a wallet by selecting from a real-time list of digital currencies and tokens to save to the database.
+* Coins are selected in real-time, and persisted to the database as an associated coin to either a wallet, or a transaction.
+* Users can submit their own prices if purchased at a different time for their own transactions/wallets.
+* User sign-in, sign-out, and session security is handled with Devise [Devise](https://github.com/plataformatec/devise)
+* Users can log in with Facebook using [Omniauth](https://github.com/omniauth/omniauth)
+* Displays real-time price data on Bitcoin, Ethereum, and Litecoin
+* Displays stats on the Coins saved with the most transactions.
+* Users can ONLY create, read, update, or delete their OWN transactions and wallets.
+* All user data is validated using ActiveRecord/Rails model validations.
+* Database schema is created in PostgresQL
+* Styled custom SCSS with a base open-source [Bootstrap theme](https://bootswatch.com/lux/)
 
-* Ruby version
+## Installation
 
-* System dependencies
+Fork and clone this repository, and then execute:
 
-* Configuration
+    $ bundle install
 
-* Database creation
+    $ rake db:migrate
 
-* Database initialization
+Then run:
 
-* How to run the test suite
+    $ rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+Open up a new browser window and navigate to:
 
-* Deployment instructions
+    localhost:3000
+    
+# Models
 
-* ...
+This app uses 5 ActiveRecord Models: ```User, Coin, Wallet, Transaction, and CryptocompareApi```. The join table is ```Transaction```.
+
+User:
+  ```
+  has_many :transactions
+  has_many :coins, through: :transactions
+  has_many :wallets
+  ```
+  
+Coin:
+  ```
+  has_many :transactions
+  has_many :users, through: :transactions
+  has_many :wallets
+  
+  validates :name, :symbol
+  ```
+  
+Wallet:
+  ```
+  belongs_to :user
+  belongs_to :coin
+  
+  validates :name, :coin_amount, :user_deposit (presence, and greater than 0)
+  ```
+  
+Transaction:
+  ```
+  belongs_to :user
+  belongs_to :coin
+  
+  validates :amount, :quantity, :price_per_coin, :fee (presence, and greater than 0)
+  ```
+  
+Cryptocompare API:
+  
+  ```
+  Uses custom methods, to parse real-time price data, symbols, coin names, and coin IDs.
+  ```
+  
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/TheInvalidNonce/coinance. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## License
+
+The app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
