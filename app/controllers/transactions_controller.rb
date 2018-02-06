@@ -33,6 +33,14 @@ class TransactionsController < ApplicationController
     end
   end
   
+  def update
+    
+  end
+  
+  def destroy
+    
+  end
+  
   private
   
   def set_tx
