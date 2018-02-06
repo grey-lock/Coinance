@@ -10,6 +10,17 @@
       <p class="mb-1">Coin price: $<%= @transaction.price_per_coin %></p>
       <p class="mb-1">Most recent price: $<%= @transaction.coin.last_known_value %></p>
       <p class="mb-1">Transaction fee: $<%= @transaction.fee %></p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
+      
+      <hr class="my-4">
+      <div class="container">
+      <%= link_to "Edit", 
+          edit_user_transaction_path(current_user, @transaction),
+          class: "btn btn-primary btn-lg", role: "button" if current_user %>
+                
+      <%= link_to "Delete", user_transaction_path(current_user, @transaction), 
+          method: :delete, 
+          data: {confirm: "Are you sure you want to delete this transaction?"},
+          class: "btn btn-primary btn-lg", role: "button" if current_user %>
+      </div>
   </div>
 </div>
