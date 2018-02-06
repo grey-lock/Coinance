@@ -13,7 +13,7 @@
   
         <p class="mb-1">Wallet name: <%= wallet.name %></p>
         <p class="mb-1">Coin: <%= wallet.coin.name if wallet.coin %></p>
-        <p class="mb-1">Amount: <%= wallet.coin_amount %> <%= wallet.coin.symbol if wallet.coin %></p>
+        <p class="mb-1">Amount: <%= wallet.coin_amount %> <%= wallet.coin.symbol %></p>
         <p class="mb-1">Amount you deposited: $<%= wallet.user_deposit %></p>
         <p class="mb-1">Net value: $<%= wallet.net_value %></p>
         

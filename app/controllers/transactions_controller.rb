@@ -14,13 +14,19 @@ class TransactionsController < ApplicationController
   end
   
   def create
-    # @transaction.transaction_params = params[:transaction]
-    @transaction = current_user.transactions.build(transaction_params)
-    @transaction.coin = Coin.new
-    @transaction.coin.name = params[:transaction][:coin].scan(/\w+(?!\w|\()/)[0]
-    @transaction.coin.symbol = params[:transaction][:coin].scan(/\w+(?!\w|\()/)[1]
     
-    @transaction.coin.last_known_value = CryptocompareApi.last_known_value(params[:transaction][:coin].scan(/\w+(?!\w|\()/)[1]) if params[:coin]
+    @transaction = current_user.transactions.build(transaction_params)
+    @transaction.transaction_params = params[:transaction]
+    @transaction.coin = Coin.new
+    
+    # Split the coin name at parentheses
+    coin_info = params[:transaction][:coin].split(" ")
+    coin_name = coin_info[0...-1].join(" ")
+    coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)
+    
+    @transaction.coin.name = coin_name
+    @transaction.coin.symbol = coin_symbol
+    @transaction.coin.last_known_value = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
     
     if @transaction.valid?
       @transaction.save
@@ -47,7 +53,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value])
   end
   
 end

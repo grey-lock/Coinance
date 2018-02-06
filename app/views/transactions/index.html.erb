@@ -11,7 +11,7 @@
       
         <h5 class="pull-right"><small class="text-muted"><%= tx.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
         
-        <p class="mb-1">Coin: <%= tx.coin.name if tx.coin %></p>
+        <p class="mb-1">Coin: <%= tx.coin.name %></p>
         <p class="mb-1">Amount: <%= tx.amount %></p>
         <p class="mb-1">Quantity: <%= tx.quantity %></p>
         <p class="mb-1">Coin price: $<%= tx.price_per_coin %></p>

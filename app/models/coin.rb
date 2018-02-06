@@ -25,6 +25,10 @@ class Coin < ApplicationRecord
     self.name.scan(/\w+(?!\w|\()/)[1]
   end
   
+  def coin_attributes=(coin_params)
+    @coin_params = coin_params
+  end
+    
   def self.most_transactions
     coin_hash = {}
       self.all.each do |coin|
