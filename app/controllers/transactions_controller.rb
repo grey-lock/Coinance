@@ -22,7 +22,7 @@ class TransactionsController < ApplicationController
     # Split the coin name at parentheses
     coin_info = params[:transaction][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
-    coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/).to_s
+    coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     
     @transaction.coin.name = coin_name
     @transaction.coin.symbol = coin_symbol
