@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :user
-  belongs_to :coin, optional: true
+  belongs_to :coin
   
   # Removing this association until app is more complete
   # belongs_to :wallet, optional: true
