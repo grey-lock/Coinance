@@ -1,12 +1,11 @@
 class CryptocompareApi < ApplicationRecord
 
   
-  def self.price_from_to(crypto, fiat)
-    cryptoSym = crypto.upcase
-    if cryptoSym && Cryptocompare::CoinSnapshot.find(cryptoSym, fiat)['Response'] == "Success"
-      Cryptocompare::CoinSnapshot.find(cryptoSym,"#{fiat.upcase}")['Data'].values[6]['PRICE'].to_f.round(2)
+  def self.price_from_to(crypto)
+    if crypto && Cryptocompare::CoinSnapshot.find(crypto, 'USD')['Response'] == "Success"
+      Cryptocompare::CoinSnapshot.find(crypto,"USD")['Data']['AggregatedData']['PRICE'].to_f.round(4)
     else
-      nil
+      return 0.0
     end
   end
   
@@ -26,7 +25,7 @@ class CryptocompareApi < ApplicationRecord
   def self.last_known_value(coinSym)
     # Send the found coin symbol to the method for price conversion
     coinSym.upcase
-    CryptocompareApi.price_from_to(coinSym, 'USD')
+    CryptocompareApi.price_from_to(coinSym)
   end  
   
 end
