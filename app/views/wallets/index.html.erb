@@ -7,7 +7,7 @@
     <div class="list-group">
       
     <% current_user.wallets.reverse.each do |wallet| %>
-      <%= link_to user_wallet_path(current_user, @wallets), class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+      <%= link_to user_wallet_path(current_user, wallet), class: "list-group-item list-group-item-action flex-column align-items-start" do %>
       
         <h5 class="pull-right"><small class="text-muted"><%= wallet.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
   

@@ -5,9 +5,8 @@ class TransactionsController < ApplicationController
     @transactions = current_user.transactions
   end
   
-  # show is not pointing to the right location
   def show
-    @transaction = current_user.transactions.find_by(id: params[:id])
+    @transaction = Transaction.find(params[:id]) 
   end
   
   def new

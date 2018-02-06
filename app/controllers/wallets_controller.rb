@@ -6,7 +6,7 @@ class WalletsController < ApplicationController
   end
   
   def show
-    @wallet = current_user.wallets.find_by(id: params[:id])
+    @wallet = Wallet.find(params[:user_id])
   end
   
   def new
