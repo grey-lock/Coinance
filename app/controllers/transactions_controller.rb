@@ -26,7 +26,9 @@ class TransactionsController < ApplicationController
     
     @transaction.coin.name = coin_name
     @transaction.coin.symbol = coin_symbol
-    @transaction.coin.last_known_value = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
+    
+    @transaction.coin.last_known_value = coin_price if coin_price
     
     if @transaction.valid?
       @transaction.save
