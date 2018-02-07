@@ -42,10 +42,10 @@ class TransactionsController < ApplicationController
   end
   
   def update
-    user_is_current_user
     # Check if the transaction belongs to the user
-      @transaction.transaction_params = params[:transaction]
-    
+      # @transaction.transaction_params = params[:transaction]
+      
+      @transaction.update(transaction_params)
       # Split the coin name at parentheses
       coin_info = params[:transaction][:coin].split(" ")
       coin_name = coin_info[0...-1].join(" ")
