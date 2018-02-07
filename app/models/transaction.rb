@@ -5,8 +5,8 @@ class Transaction < ApplicationRecord
   # Removing this association until app is more complete
   # belongs_to :wallet, optional: true
   
-  validates :amount, :quantity, :price_per_coin, numericality: { greater_than: 0 }
-  validates :fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :amount, :quantity, :price_per_coin, numericality: { greater_than: 0.0000 }
+  validates :fee, numericality: { greater_than_or_equal_to: 0.0000 }
   
   def transaction_params=(transaction_params)
     @transaction_params = transaction_params
