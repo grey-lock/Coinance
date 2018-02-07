@@ -14,7 +14,7 @@
         
         <p class="mb-1">Coin: <%= tx.coin.name %></p>
         <p class="mb-1">Amount: <%= tx.amount %></p>
-        <p class="mb-1">Quantity: <%= tx.quantity %></p>
+        <p class="mb-1">Quantity: <%= tx.quantity %> <%= tx.coin.symbol %></p>
         <p class="mb-1">Coin price: $<%= tx.price_per_coin %></p>
         <p class="mb-1">Transaction fee: $<%= tx.fee %></p>
         

@@ -1,12 +1,13 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!, :set_tx
+  before_action :user_is_current_user, only: [:show, :edit, :update, :destroy]
   
   def index
     @transactions = current_user.transactions
   end
   
   def show
-    @transaction = Transaction.find(params[:id]) 
+    @transaction = Transaction.find(params[:id])
   end
   
   def new
@@ -40,30 +41,32 @@ class TransactionsController < ApplicationController
     end
   end
   
+  # currently a user can edit another users transaction
   def update
-    @transaction = current_user.transactions.find(params[:id])
-    @transaction.transaction_params = params[:transaction]
+    user_is_current_user
+    # Check if the transaction belongs to the user
+      @transaction.transaction_params = params[:transaction]
     
-    # Split the coin name at parentheses
-    coin_info = params[:transaction][:coin].split(" ")
-    coin_name = coin_info[0...-1].join(" ")
-    coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
+      # Split the coin name at parentheses
+      coin_info = params[:transaction][:coin].split(" ")
+      coin_name = coin_info[0...-1].join(" ")
+      coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     
-    # Assign the params to the coin
-    @transaction.coin.update(name: coin_name)
-    @transaction.coin.update(symbol: coin_symbol)
-    coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:transaction][:coin]
+      # Assign the params to the coin
+      @transaction.coin.update(name: coin_name)
+      @transaction.coin.update(symbol: coin_symbol)
+      coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:transaction][:coin]
     
-    @transaction.coin.update(last_known_value: coin_price) if coin_price
-    # binding.pry
-    if @transaction.valid?
-      @transaction.save
-      flash[:success] = "Transaction successfully updated!"
-      redirect_to user_transactions_path(current_user)
-    else
-      flash[:alert] = @transaction.errors.full_messages.to_sentence
-      redirect_to 'transactions/edit'
-    end
+      @transaction.coin.update(last_known_value: coin_price) if coin_price
+        # binding.pry
+      if @transaction.valid? && @transaction.user == current_user
+        @transaction.save
+        flash[:success] = "Transaction successfully updated!"
+        redirect_to user_transactions_path(current_user)
+      else
+        flash[:alert] = @transaction.errors.full_messages.to_sentence
+        redirect_to user_transaction_path(current_user, @transaction)
+      end
   end
   
   def destroy
@@ -80,6 +83,13 @@ class TransactionsController < ApplicationController
   end
   
   private
+
+  def user_is_current_user
+    unless current_user.id == params[:user_id].to_i
+      flash[:alert] = "You may only view your own transactions."
+      redirect_to root_path
+    end
+  end
   
   def set_tx
     @transaction = Transaction.find_by(id: params[:id])
