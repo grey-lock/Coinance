@@ -59,6 +59,19 @@ class WalletsController < ApplicationController
       end
   end
   
+  def destroy
+    @wallet = current_user.wallets.find_by(id: params[:id])
+    # binding.pry
+    if @wallet.user_id == current_user.id
+      flash[:success] = "Wallet deleted!"
+      @wallet.destroy 
+      redirect_to user_wallets_path(current_user)
+    else
+      flash[:alert] = "Unauthorized action! The administrator has been notified."
+      redirect_to user_wallet_path(current_user, @wallet)
+    end
+  end
+  
   
   private
   
