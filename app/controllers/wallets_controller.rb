@@ -32,8 +32,42 @@ class WalletsController < ApplicationController
     end
   end
   
+  def update
+    user_is_current_user
+    # Check if the wallet belongs to the user
+      @wallet.wallet_params = params[:wallet]
+    
+      # Split the coin name at parentheses
+      coin_info = params[:wallet][:coin].split(" ")
+      coin_name = coin_info[0...-1].join(" ")
+      coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
+    
+      # Assign the params to the coin
+      @wallet.coin.update(name: coin_name)
+      @wallet.coin.update(symbol: coin_symbol)
+      coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:wallet][:coin]
+    
+      @wallet.coin.update(last_known_value: coin_price) if coin_price
+        # binding.pry
+      if @wallet.valid? && @wallet.user == current_user
+        @wallet.save
+        flash[:success] = "Wallet successfully updated!"
+        redirect_to user_wallets_path(current_user)
+      else
+        flash[:alert] = @wallet.errors.full_messages.to_sentence
+        redirect_to user_wallets_path(current_user, @wallet)
+      end
+  end
+  
   
   private
+  
+  def user_is_current_user
+    unless current_user.id == params[:user_id].to_i
+      flash[:alert] = "You may only view your own wallets."
+      redirect_to root_path
+    end
+  end
   
   def set_wallet
     @wallet = Wallet.find_by(id: params[:id])

@@ -41,7 +41,6 @@ class TransactionsController < ApplicationController
     end
   end
   
-  # currently a user can edit another users transaction
   def update
     user_is_current_user
     # Check if the transaction belongs to the user
