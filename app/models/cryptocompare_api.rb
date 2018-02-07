@@ -24,7 +24,7 @@ class CryptocompareApi < ApplicationRecord
   
   def self.last_known_value(coinSym)
     # Send the found coin symbol to the method for price conversion
-    coinSym.upcase
+    # coinSym.upcase
     CryptocompareApi.price_from_to(coinSym)
   end  
   
