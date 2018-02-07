@@ -2,6 +2,7 @@
 
 Coinance is a Ruby on Rails web application that allows you to to manage a protfolio of your digital currency assets and investments.
 
+* Live demo deployed to [Heroku](https://coinance.herokuapp.com)
 * Users can create an account to store data on transactions and wallets where they have any cryptocurrencies.
 * Leverages the [Cryptocompare API](https://www.cryptocompare.com/api/) to retrieve real-time info & price data on 2,000+ cryptocurrencies and tokens.
 * Users can save a transaction or a wallet by selecting from a real-time list of digital currencies and tokens to save to the database.
