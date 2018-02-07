@@ -5,8 +5,5 @@ class CoinsController < ApplicationController
      @most_transactions = Coin.most_transactions
   end
   
-  def show
-   
-  end
  
 end

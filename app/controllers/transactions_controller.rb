@@ -23,12 +23,11 @@ class TransactionsController < ApplicationController
     coin_info = params[:transaction][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
-    
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
+  
     # Assign the params to the coin
     @transaction.coin.name = coin_name
     @transaction.coin.symbol = coin_symbol
-    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
-  
     @transaction.coin.last_known_value = coin_price if coin_price
     
     if @transaction.valid?
@@ -42,35 +41,33 @@ class TransactionsController < ApplicationController
   end
   
   def update
-    # Check if the transaction belongs to the user
-      # @transaction.transaction_params = params[:transaction]
-      
-      @transaction.update(transaction_params)
-      # Split the coin name at parentheses
-      coin_info = params[:transaction][:coin].split(" ")
-      coin_name = coin_info[0...-1].join(" ")
-      coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
+    @transaction.update(transaction_params)
     
-      # Assign the params to the coin
-      @transaction.coin.update(name: coin_name)
-      @transaction.coin.update(symbol: coin_symbol)
-      coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:transaction][:coin]
+    # Split the coin name at parentheses
+    coin_info = params[:transaction][:coin].split(" ")
+    coin_name = coin_info[0...-1].join(" ")
+    coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     
-      @transaction.coin.update(last_known_value: coin_price) if coin_price
-        # binding.pry
-      if @transaction.valid? && @transaction.user == current_user
-        @transaction.save
-        flash[:success] = "Transaction successfully updated!"
-        redirect_to user_transactions_path(current_user)
-      else
-        flash[:alert] = @transaction.errors.full_messages.to_sentence
-        redirect_to user_transaction_path(current_user, @transaction)
-      end
+    # Assign the params to the coin
+    @transaction.coin.update(name: coin_name)
+    @transaction.coin.update(symbol: coin_symbol)
+    coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:transaction][:coin]
+    
+    @transaction.coin.update(last_known_value: coin_price) if coin_price
+    
+    if @transaction.valid? && @transaction.user == current_user
+      @transaction.save
+      flash[:success] = "Transaction successfully updated!"
+      redirect_to user_transactions_path(current_user)
+    else
+      flash[:alert] = @transaction.errors.full_messages.to_sentence
+      redirect_to user_transaction_path(current_user, @transaction)
+    end
   end
   
   def destroy
     @transaction = current_user.transactions.find_by(id: params[:id])
-    # binding.pry
+    
     if @transaction.user_id == current_user.id
       flash[:success] = "Transaction deleted!"
       @transaction.destroy 
