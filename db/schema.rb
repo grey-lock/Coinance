@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20180124232110) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.float "amount", default: 0.0
-    t.float "quantity", default: 0.0
-    t.float "price_per_coin", default: 0.0
-    t.float "fee", default: 0.0
+    t.decimal "amount", precision: 12, scale: 6, default: "0.0"
+    t.decimal "quantity", precision: 12, scale: 6, default: "0.0"
+    t.decimal "price_per_coin", precision: 12, scale: 6, default: "0.0"
+    t.decimal "fee", precision: 12, scale: 6, default: "0.0"
     t.bigint "user_id"
     t.bigint "coin_id"
     t.datetime "created_at", null: false
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20180124232110) do
 
   create_table "wallets", force: :cascade do |t|
     t.string "name"
-    t.float "coin_amount", default: 0.0
-    t.float "user_deposit", default: 0.0
-    t.float "net_value", default: 0.0
+    t.decimal "coin_amount", precision: 12, scale: 6, default: "0.0"
+    t.decimal "user_deposit", precision: 12, scale: 6, default: "0.0"
+    t.decimal "net_value", precision: 12, scale: 6, default: "0.0"
     t.bigint "user_id"
     t.bigint "coin_id"
     t.datetime "created_at", null: false
