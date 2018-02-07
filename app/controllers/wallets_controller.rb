@@ -1,5 +1,6 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!, :set_wallet
+  before_action :user_is_current_user, only: [:show, :edit, :update, :destroy]
   
   def index
     @wallets = current_user.wallets
