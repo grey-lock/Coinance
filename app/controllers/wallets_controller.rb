@@ -22,8 +22,7 @@ class WalletsController < ApplicationController
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
-    # raise coin_symbol.inspect
-    binding.pry
+    
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     
     @wallet.coin.name = coin_name
@@ -94,7 +93,7 @@ class WalletsController < ApplicationController
   
   # Require wallet params, as well as user_id & coin_id
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin_attributes: [:name, :symbol, :last_known_value])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin: [:name, :symbol, :last_known_value])
   end
   
 end
