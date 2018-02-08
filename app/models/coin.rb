@@ -17,14 +17,6 @@ class Coin < ApplicationRecord
     Cryptocompare::CoinList.all['Data'].map { |arr| arr[1].dig('CoinName') }
   end
   
-  def name_from_full
-    self.name.scan(/\w+(?!\w|\()/)[0]
-  end
-  
-  def sym_from_full
-    self.name.scan(/\w+(?!\w|\()/)[1]
-  end
-  
   def coin_attributes=(coin_params)
     @coin_params = coin_params
   end
