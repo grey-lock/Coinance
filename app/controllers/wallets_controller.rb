@@ -1,4 +1,7 @@
 class WalletsController < ApplicationController
+  # Authenticate the user has logged in before all actions
+  # Set the @wallet object before the action so the form can load properly based on the route
+  # Check if the current_user is the user that owns the wallet
   before_action :authenticate_user!, :set_wallet
   before_action :user_is_current_user, only: [:show, :edit, :update, :destroy]
   
@@ -60,6 +63,7 @@ class WalletsController < ApplicationController
       redirect_to user_wallets_path(current_user)
     else
       flash[:alert] = @wallet.errors.full_messages.to_sentence
+      # Redirect preserves the visual formatting
       redirect_to user_wallets_path(current_user, @wallet)
     end
   end
@@ -73,6 +77,7 @@ class WalletsController < ApplicationController
       redirect_to user_wallets_path(current_user)
     else
       flash[:alert] = "Unauthorized action! The administrator has been notified."
+      # Redirect preserves the visual formatting
       redirect_to user_wallet_path(current_user, @wallet)
     end
   end
@@ -88,10 +93,9 @@ class WalletsController < ApplicationController
   end
   
   def set_wallet
-    @wallet = Wallet.find_by(id: params[:id])
+    @wallet = Wallet.find_by(id: params[:id]).to_i
   end
   
-  # Require wallet params, as well as user_id & coin_id
   def wallet_params
     params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin: [:name, :symbol, :last_known_value])
   end

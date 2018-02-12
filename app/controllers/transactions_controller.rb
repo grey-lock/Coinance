@@ -1,8 +1,12 @@
 class TransactionsController < ApplicationController
+  # Authenticate the user has logged in before all actions 
+  # Set the @transaction object before the action so the form can load properly based on the route
+  # Check if the current_user is the user that owns the transaction
   before_action :authenticate_user!, :set_tx
   before_action :user_is_current_user, only: [:show, :edit, :update, :destroy]
   
   def index
+    # Find all of the current_user transactions
     @transactions = current_user.transactions
   end
   
@@ -35,6 +39,7 @@ class TransactionsController < ApplicationController
       redirect_to user_transactions_path(current_user)
     else
       flash[:alert] = @transaction.errors.full_messages.to_sentence
+      # Redirect preserves the visual formatting
       redirect_to new_user_transaction_path(current_user)
     end
   end
@@ -60,6 +65,7 @@ class TransactionsController < ApplicationController
       redirect_to user_transactions_path(current_user)
     else
       flash[:alert] = @transaction.errors.full_messages.to_sentence
+      # Redirect preserves the visual formatting
       redirect_to user_transaction_path(current_user, @transaction)
     end
   end
@@ -73,6 +79,7 @@ class TransactionsController < ApplicationController
       redirect_to user_transactions_path(current_user)
     else
       flash[:alert] = "Unauthorized action! The administrator has been notified."
+      # Redirect preserves the visual formatting
       redirect_to user_transaction_path(current_user, @transaction)
     end
   end
