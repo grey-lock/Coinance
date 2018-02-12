@@ -16,7 +16,6 @@ class TransactionsController < ApplicationController
   
   def create
     @transaction = current_user.transactions.build(transaction_params)
-    # @transaction.transaction_params = params[:transaction]
     @transaction.coin = Coin.new
     
     # Split the coin name at parentheses
