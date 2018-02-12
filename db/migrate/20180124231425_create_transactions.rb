@@ -7,6 +7,7 @@ class CreateTransactions < ActiveRecord::Migration[5.1]
       t.float :fee, default: 0.0000, precision: 12, scale: 6
       t.belongs_to :user
       t.belongs_to :coin
+      t.belongs_to :wallet
       
       t.timestamps
     end

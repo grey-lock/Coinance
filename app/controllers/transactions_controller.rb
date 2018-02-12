@@ -35,6 +35,7 @@ class TransactionsController < ApplicationController
     @transaction.coin.last_known_value = coin_price if coin_price
     
     if @transaction.valid?
+      binding.pry
       @transaction.save
       flash[:success] = "Transaction successfully added!"
       redirect_to user_transactions_path(current_user)
