@@ -7,7 +7,9 @@ class Transaction < ApplicationRecord
   validates :fee, format: { with: /\A\d{1,6}(.\d{0,4})?\z/  }, numericality: { greater_than_or_equal_to: 0.0000 }
   
   def wallet_attributes=(wallet_attributes)
-    
+    wallet_attributes.each do |wall_attr|
+      
+    end
   end
   
   def transaction_params=(transaction_params)

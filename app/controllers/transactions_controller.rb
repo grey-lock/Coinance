@@ -16,6 +16,7 @@ class TransactionsController < ApplicationController
   
   def new
     @transaction = Transaction.new
+    @wallet = Wallet.new
   end
   
   def create
