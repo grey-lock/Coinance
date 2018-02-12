@@ -93,7 +93,7 @@ class WalletsController < ApplicationController
   end
   
   def set_wallet
-    @wallet = Wallet.find_by(id: params[:id]).to_i
+    @wallet = Wallet.find_by(id: params[:id])
   end
   
   def wallet_params
