@@ -1,13 +1,13 @@
 <div class="jumbotron">
   <h1 class="display-4">Most Transactions</h1>
   <p>
-    Last BTC Price: $<%= CryptocompareApi.price_from_to("BTC") %>
+    Last Bitcoin (BTC) Price: $<%= CryptocompareApi.price_from_to("BTC") %>
   </p>
   <p>
-    Last ETH Price: $<%= CryptocompareApi.price_from_to("ETH") %>
+    Last Ethereum (ETH) Price: $<%= CryptocompareApi.price_from_to("ETH") %>
   </p>
   <p>
-    Last LTC Price: $<%= CryptocompareApi.price_from_to("LTC") %>
+    Last Litcoin (LTC) Price: $<%= CryptocompareApi.price_from_to("LTC") %>
   </p>
   <p>
     <%= render partial: "coins/most_transactions", collection: @most_transactions, as: :transaction %>

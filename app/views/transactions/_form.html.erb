@@ -3,13 +3,13 @@
   <%= f.label :coin, "Select Coin Type", class: "col-form-label" %>
   <%= f.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
   
-  <%= f.label "Amount Purchased", class: "col-form-label" %>
+  <%= f.label "Amount Purchased (USD)", class: "col-form-label" %>
   <%= f.number_field :amount, class: "form-control", min: 0, step: 0.0001 %><br>
   
-  <%= f.label "Quantity", class: "col-form-label"  %>
+  <%= f.label "Coin Quantity", class: "col-form-label"  %>
   <%= f.number_field :quantity, class: "form-control", min: 0, step: 0.0001 %><br>
   
-  <%= f.label "Price Per Coin (in fiat)", class: "col-form-label"  %>
+  <%= f.label "Price Per Coin (per USD)", class: "col-form-label"  %>
   <%= f.number_field :price_per_coin, class: "form-control", min: 0, step: 0.0001  %><br>
   
   <%= f.label "Exchange fee (if any)", class: "col-form-label"  %>
