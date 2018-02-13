@@ -11,6 +11,7 @@
       <p class="mb-1">Coin price: $<%= @transaction.price_per_coin %></p>
       <p class="mb-1">Most recent price: $<%= @transaction.coin.last_known_value %></p>
       <p class="mb-1">Transaction fee: $<%= @transaction.fee %></p>
+      <p class="mb-1">Transaction notes: $<%= @transaction.notes.comment if @transaction.notes %></p>
     </div>
       <hr class="my-4">
       <div class="container">
