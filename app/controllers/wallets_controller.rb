@@ -98,7 +98,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin: [:name, :symbol, :last_known_value], transaction_attributes: [:amount, :quantity, :price_per_coin, :fee])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin: [:name, :symbol, :last_known_value], transaction_attributes: [:wallet_id, :amount, :quantity, :price_per_coin, :fee])
   end
   
 end
