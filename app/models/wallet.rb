@@ -11,9 +11,10 @@ class Wallet < ApplicationRecord
   end
   
   def transactions_attributes=(transactions_attributes)
-    transactions_attributes.each do |tx|
+    transactions_attributes.values.each do |tx|
       self.transactions.build(tx)
     end
+    self.wallet_id = Wallet.find_by(id: wallet_attributes[:id])
   end
   
 end

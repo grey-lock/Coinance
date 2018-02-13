@@ -11,16 +11,19 @@ class WalletsController < ApplicationController
   
   def show
     @wallet = Wallet.find(params[:id])
+    @tx = Transaction.find_by(wallet_id: @wallet.id)
   end
   
   def new
     @wallet = Wallet.new
-    @transaction = Transaction.new
+    @tx = Transaction.new
   end
   
   def create
     @wallet = current_user.wallets.build(wallet_params)
     @wallet.coin = Coin.new
+    # binding.pry
+    @tx = @wallet.transactions.build(params[wallet][:transaction])
     
     # Split the coin name at parentheses
     coin_info = params[:wallet][:coin].split(" ")
@@ -98,7 +101,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :net_value, :coin_id, coin: [:name, :symbol, :last_known_value], transaction_attributes: [:wallet_id, :amount, :quantity, :price_per_coin, :fee])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, coin: [:name, :symbol, :last_known_value], transaction_attributes: [:coin, :amount, :quantity, :price_per_coin, :fee, :user_id])
   end
   
 end
