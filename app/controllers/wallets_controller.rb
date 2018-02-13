@@ -11,7 +11,7 @@ class WalletsController < ApplicationController
   
   def show
     @wallet = Wallet.find(params[:id])
-    @tx = Transaction.find_by(wallet_id: @wallet.id)
+    # @tx = Transaction.find_by(id: @wallet.transactions.last.id)
   end
   
   def new
@@ -22,9 +22,6 @@ class WalletsController < ApplicationController
   def create
     @wallet = current_user.wallets.build(wallet_params)
     @wallet.coin = Coin.new
-    # binding.pry
-    @tx = @wallet.transactions.build(params[wallet][:transaction])
-    
     # Split the coin name at parentheses
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
@@ -35,6 +32,9 @@ class WalletsController < ApplicationController
     @wallet.coin.name = coin_name
     @wallet.coin.symbol = coin_symbol
     @wallet.coin.last_known_value = coin_price if coin_price
+    
+    binding.pry
+   
     
     if @wallet.valid?
       @wallet.save
@@ -101,7 +101,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, coin: [:name, :symbol, :last_known_value], transaction_attributes: [:coin, :amount, :quantity, :price_per_coin, :fee, :user_id])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, coin: [:name, :symbol, :last_known_value], transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
   end
   
 end

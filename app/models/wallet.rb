@@ -10,11 +10,22 @@ class Wallet < ApplicationRecord
     @wallet_params = wallet_params
   end
   
+  def transaction_params=(transaction_params)
+    @transaction_params = transaction_params
+  end
+  
+  # I need to assign the coin that was chosen to the wallet, 
+  # the same attributes to the transaction
+  # And the transaction to the wallet
+  
   def transactions_attributes=(transactions_attributes)
     transactions_attributes.values.each do |tx|
       self.transactions.build(tx)
+      self.transactions.coin.build(tx[:coin])
+      # binding.pry
+      # tx.wallet_id = self.id
     end
-    self.wallet_id = Wallet.find_by(id: wallet_attributes[:id])
-  end
+  end 
+  
   
 end
