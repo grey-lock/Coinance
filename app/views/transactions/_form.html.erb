@@ -17,6 +17,10 @@
   
   <%= f.hidden_field :user_id, value: current_user.id %>
     
+  <%= f.fields_for :notes, transaction.notes.build do |tx| %>
+    <%= tx.label "Notes", input_html: {value: "Enter notes here..." }, class: "col-form-label" %><br>
+    <%= tx.text_area :comment, class: "form-control" %><br>
+  <% end %>
   
   <%= f.submit "Submit Transaction", class: "btn btn-primary" %>
 <% end %>

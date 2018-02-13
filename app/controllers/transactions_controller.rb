@@ -102,7 +102,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], wallet: [:id, :name, :coin_amount, :user_deposit])
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], note_attributes:[comments:[]], wallet: [:id, :name, :coin_amount, :user_deposit])
   end
   
 end
