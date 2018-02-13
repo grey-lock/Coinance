@@ -1,4 +1,4 @@
-<%= form_for transaction, url: {action: action}, class: "form-group" do |f| %>
+<%= form_for @transaction, url: {action: action}, class: "form-group" do |f| %>
 
   <%= f.label :coin, "Select Coin Type", class: "col-form-label" %>
   <%= f.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
@@ -17,7 +17,7 @@
   
   <%= f.hidden_field :user_id, value: current_user.id %>
     
-  <%= f.fields_for :notes, transaction.notes.build do |tx| %>
+  <%= f.fields_for @note, @note.transaction.build do |tx| %>
     <%= tx.label "Notes", input_html: {value: "Enter notes here..." }, class: "col-form-label" %><br>
     <%= tx.text_area :comment, class: "form-control" %><br>
   <% end %>

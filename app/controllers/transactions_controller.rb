@@ -12,19 +12,20 @@ class TransactionsController < ApplicationController
   
   def show
     @transaction = Transaction.find(params[:id])
+    @note = Note.find_by(transaction_id: params[:id])
   end
   
   def new
     @transaction = Transaction.new
-    @wallet = Wallet.new
     @note = Note.new
   end
   
   def create
     @transaction = current_user.transactions.build(transaction_params)
     @transaction.coin = Coin.new
+    @note.transaction = params[:transaction][:note_attributes]
+    # @transaction.notes = Note.new(comment: params[:transaction][:notes_attributes])
     
-    binding.pry
     # Split the coin name at parentheses
     coin_info = params[:transaction][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
@@ -48,9 +49,10 @@ class TransactionsController < ApplicationController
   end
   
   def update
-    # binding.pry
+    
     @transaction.update(transaction_params)
     # @wallet.update(wallet_params)
+    # @transaction.notes.update(notes_attributes)
     
     # Split the coin name at parentheses
     coin_info = params[:transaction][:coin].split(" ")
@@ -103,7 +105,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], note_attributes: [:id, :comment, :transaction_id], wallet: [:id, :name, :coin_amount, :user_deposit])
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:id, :name, :symbol, :last_known_value], note_attributes: [:comment, :id, :transaction_id], wallet: [:id, :name, :coin_amount, :user_deposit])
   end
   
 end
