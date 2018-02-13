@@ -20,6 +20,7 @@ class TransactionsController < ApplicationController
   end
   
   def create
+      # binding.pry
     @transaction = current_user.transactions.build(transaction_params)
     @transaction.coin = Coin.new
     
@@ -35,7 +36,6 @@ class TransactionsController < ApplicationController
     @transaction.coin.last_known_value = coin_price if coin_price
     
     if @transaction.valid?
-      binding.pry
       @transaction.save
       flash[:success] = "Transaction successfully added!"
       redirect_to user_transactions_path(current_user)
@@ -47,7 +47,9 @@ class TransactionsController < ApplicationController
   end
   
   def update
+    # binding.pry
     @transaction.update(transaction_params)
+    # @wallet.update(wallet_params)
     
     # Split the coin name at parentheses
     coin_info = params[:transaction][:coin].split(" ")
@@ -100,7 +102,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], wallet:[:id, :name, :coin_amount, :user_deposit])
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], wallet: [:id, :name, :coin_amount, :user_deposit])
   end
   
 end

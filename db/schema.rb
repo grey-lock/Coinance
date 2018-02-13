@@ -24,16 +24,18 @@ ActiveRecord::Schema.define(version: 20180124232110) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.decimal "amount", precision: 12, scale: 6, default: "0.0"
-    t.decimal "quantity", precision: 12, scale: 6, default: "0.0"
-    t.decimal "price_per_coin", precision: 12, scale: 6, default: "0.0"
-    t.decimal "fee", precision: 12, scale: 6, default: "0.0"
+    t.float "amount", default: 0.0
+    t.float "quantity", default: 0.0
+    t.float "price_per_coin", default: 0.0
+    t.float "fee", default: 0.0
     t.bigint "user_id"
     t.bigint "coin_id"
+    t.bigint "wallet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["coin_id"], name: "index_transactions_on_coin_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
+    t.index ["wallet_id"], name: "index_transactions_on_wallet_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,9 +62,9 @@ ActiveRecord::Schema.define(version: 20180124232110) do
 
   create_table "wallets", force: :cascade do |t|
     t.string "name"
-    t.decimal "coin_amount", precision: 12, scale: 6, default: "0.0"
-    t.decimal "user_deposit", precision: 12, scale: 6, default: "0.0"
-    t.decimal "net_value", precision: 12, scale: 6, default: "0.0"
+    t.float "coin_amount", default: 0.0
+    t.float "user_deposit", default: 0.0
+    t.float "net_value", default: 0.0
     t.bigint "user_id"
     t.bigint "coin_id"
     t.datetime "created_at", null: false

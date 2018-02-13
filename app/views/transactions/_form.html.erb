@@ -9,7 +9,7 @@
   <%= f.label "Coin Quantity", class: "col-form-label"  %>
   <%= f.number_field :quantity, class: "form-control", min: 0, step: 0.0001 %><br>
   
-  <%= f.label "Price Per Coin (per USD)", class: "col-form-label"  %>
+  <%= f.label "Price Per Coin (USD)", class: "col-form-label"  %>
   <%= f.number_field :price_per_coin, class: "form-control", min: 0, step: 0.0001  %><br>
   
   <%= f.label "Exchange fee (if any)", class: "col-form-label"  %>
@@ -22,7 +22,7 @@
   
   <p>Or create a new wallet here:</p>
   
-  <%= f.fields_for :wallets do |w| %>
+  <%= f.fields_for @wallet do |w| %>
     <%= w.label :coin, "Select Coin", class: "col-form-label" %>
     <!--Select a coin from the JSON array-->
     <%= w.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>

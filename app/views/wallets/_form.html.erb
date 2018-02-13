@@ -13,5 +13,28 @@
   
   <%= f.hidden_field :user_id, value: current_user.id %><br>
   
+  <%= f.label :transaction_id, "Select a transaction to associate this transaction to", class: "col-form-label" %> 
+  <%= f.collection_select :transaction, current_user.transactions, :id, :quantity, :amount, include_blank: true, class: "form-control"%><br>
+  
+  <p>Or create a new transaction here:</p>
+  
+  <%= f.fields_for :transaction do |tx| %>
+    <%= tx.label :coin, "Select Coin", class: "col-form-label" %>
+    <!--Select a coin from the JSON array-->
+    <%= tx.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
+  
+    <%= tx.label "Amount Purchased (USD)", class: "col-form-label" %>
+    <%= tx.number_field :amount, class: "form-control" %><br>
+    
+    <%= tx.label "Coin Quantity", class: "col-form-label" %>
+    <%= tx.number_field :quantity, class: "form-control", min: 0, step: 0.0001 %><br>
+    
+    <%= tx.label "Price Per Coin (USD)", class: "col-form-label" %>
+    <%= tx.number_field :user_deposit, class: "form-control", min: 0, step: 0.0001 %><br>
+    
+    <%= tx.label "Exchange fee (if any)", class: "col-form-label"  %>
+    <%= tx.number_field :fee, class: "form-control", min: 0, step: 0.0001  %><br>
+  
+  
   <%= f.submit "Submit Wallet", class: "btn btn-primary" %>
 <% end %>
