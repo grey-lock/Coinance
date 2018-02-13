@@ -16,25 +16,6 @@
   <%= f.number_field :fee, class: "form-control", min: 0, step: 0.0001  %><br>
   
   <%= f.hidden_field :user_id, value: current_user.id %>
-  
-  <%= f.label :wallet_id, "Select a wallet to associate this transaction to", class: "col-form-label" %> 
-  <%= f.collection_select :wallet, current_user.wallets, :id, :name, include_blank: true, class: "form-control"%><br>
-  
-  <p>Or create a new wallet here:</p>
-  
-  <%= f.fields_for @wallet do |w| %>
-    <%= w.label :coin, "Select Coin", class: "col-form-label" %>
-    <!--Select a coin from the JSON array-->
-    <%= w.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
-  
-    <%= w.label "Wallet Name", class: "col-form-label" %>
-    <%= w.text_field :name, class: "form-control" %><br>
-    <%= w.label "Coin Quantity", class: "col-form-label" %>
-    <%= w.number_field :coin_amount, class: "form-control", min: 0, step: 0.0001 %><br>
-    <%= w.label "User Deposit", class: "col-form-label" %>
-    <%= w.number_field :user_deposit, class: "form-control", min: 0, step: 0.0001 %><br>
-  
-  <% end %> 
     
   
   <%= f.submit "Submit Transaction", class: "btn btn-primary" %>

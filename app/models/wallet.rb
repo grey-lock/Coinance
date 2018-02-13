@@ -10,5 +10,10 @@ class Wallet < ApplicationRecord
     @wallet_params = wallet_params
   end
   
+  def transaction_attributes=(transaction_attributes)
+    transaction_attributes.each do |tx|
+      self.transactions.build(tx)
+    end
+  end
   
 end
