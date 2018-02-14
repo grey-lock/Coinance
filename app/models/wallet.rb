@@ -11,15 +11,16 @@ class Wallet < ApplicationRecord
   end
   
   # I need to assign the coin that was chosen to the wallet, 
-  # the same attributes to the transaction
+  # the same coin attributes to the transaction
   # And the transaction to the wallet
+  # I get @wallet is invalid
   
   def transactions_attributes=(transactions_attributes)
-    transactions_attributes.values.each do |tx|
-      self.transactions.build(tx)
-      self.transactions.coin.build(tx[:coin])
-      # binding.pry
-      # tx.wallet_id = self.id
+    transactions_attributes.values.each do |tx_attr|
+      transaction = Transaction.find_or_create_by(tx_attr)
+      transaction.user_id = self.user_id
+      transaction.wallet_id = self.id
+      self.transactions << transaction
     end
   end 
   
