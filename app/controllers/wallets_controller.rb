@@ -21,21 +21,21 @@ class WalletsController < ApplicationController
   
   def create
     @wallet = current_user.wallets.build(wallet_params)
-    @wallet.coin = Coin.new
+    
     # Split the coin name at parentheses
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
-    
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     
-    @wallet.coin.name = coin_name
-    @wallet.coin.symbol = coin_symbol
-    @wallet.coin.last_known_value = coin_price if coin_price
-   
-  # binding.pry
+    @wallet.coin = Coin.new(name: coin_name, symbol: coin_symbol, last_known_value: coin_price)
+
+    # @wallet.coin.name = coin_name
+    # @wallet.coin.symbol = coin_symbol
+    # @wallet.coin.last_known_value = coin_price if coin_price
     
     if @wallet.valid?
+      binding.pry
       @wallet.save
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
@@ -100,7 +100,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, coin: [:name, :symbol, :last_known_value], transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
   end
   
 end
