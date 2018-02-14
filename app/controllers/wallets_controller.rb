@@ -33,6 +33,7 @@ class WalletsController < ApplicationController
     @wallet.coin.symbol = coin_symbol
     @wallet.coin.last_known_value = coin_price if coin_price
    
+  # binding.pry
     
     if @wallet.valid?
       @wallet.save

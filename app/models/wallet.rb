@@ -3,6 +3,7 @@ class Wallet < ApplicationRecord
   belongs_to :coin
   has_many :transactions
   
+  validates_associated :transactions
   validates :name, presence: true
   validates :coin_amount, :user_deposit, format: { with: /\A\d{1,6}(.\d{0,4})?\z/  }, numericality: { greater_than_or_equal_to: 0.0000 }
   
@@ -20,6 +21,7 @@ class Wallet < ApplicationRecord
       transaction = Transaction.find_or_create_by(tx_attr)
       transaction.user_id = self.user_id
       transaction.wallet_id = self.id
+      transaction.coin = self.coin
       self.transactions << transaction
     end
   end 
