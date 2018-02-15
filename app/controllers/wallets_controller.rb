@@ -22,27 +22,27 @@ class WalletsController < ApplicationController
   def create
     @wallet = current_user.wallets.build(wallet_params)
     
-    # Split the coin name at parentheses
+    # Split the coin name
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    # Create the coin to associate
+    # Find or Create the coin to associate
     @wallet.coin = Coin.find_or_create_by(
                             name: coin_name, 
                             symbol: coin_symbol, 
                             last_known_value: coin_price,
                             id: coin_id)
-                            
+    binding.pry
     # Check if the wallet is valid, and the coin is valid
     if @wallet.valid? && @wallet.coin.valid?
-      @wallet.save
       @wallet.coin.save
-      
-      @wallet.transactions.last.coin = @wallet.coin
-      # @wallet.transactions.last.update(coin_id: coin_id)
+      @wallet.save
+      @tx = Transaction.find_by(wallet_id: @wallet.id)
+      @tx.coin = @wallet.coin
+      @tx.save
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
     else
@@ -54,35 +54,32 @@ class WalletsController < ApplicationController
   def update
     @wallet.update(wallet_params)
     
-    # Split the coin name at parentheses
+    # Split the coin name
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    # Fix from here
-    
-    binding.pry
+    # Find or Create the coin to associate
     @wallet.coin = Coin.find_or_create_by(
                             name: coin_name, 
                             symbol: coin_symbol, 
                             last_known_value: coin_price,
                             id: coin_id)
     
-    # Assign the params to the coin
+    # Update the coin info
     @wallet.coin.update(name: coin_name, symbol: coin_symbol)
     @wallet.coin.update(last_known_value: coin_price) if coin_price
     
-    if @wallet.valid? &&@wallet.user == current_user
+    if @wallet.valid? && @wallet.user == current_user
       @wallet.coin.save
       @wallet.save
       
-      
-      binding.pry
+      # Assign the last transaction if no coin selected
       @wallet.transactions.last.coin = @wallet.coin
+      @wallet.transactions.last.coin.save
       
-      Transaction.last.update(coin_id: @wallet.transactions.last.coin.id)
       flash[:success] = "Wallet successfully updated!"
       redirect_to user_wallets_path(current_user)
     else

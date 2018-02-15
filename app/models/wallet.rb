@@ -23,11 +23,16 @@ class Wallet < ApplicationRecord
         transaction = Transaction.new(tx_attr)
         transaction.user_id = self.user_id
         # transaction.wallet_id = self.id
-        transaction.save if transaction.valid? 
-        self.transactions << transaction
+        if transaction.valid?
+          # transaction.save
+          self.transactions << transaction
+        end
       else
         transaction = Transaction.find_by(id: transaction.id)
-        self.transactions << transaction 
+        if transaction.valid? && self.valid?
+          # transaction.save
+          self.transactions << transaction
+        end
       end
     end
   end 
