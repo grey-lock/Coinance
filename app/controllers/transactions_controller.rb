@@ -59,9 +59,12 @@ class TransactionsController < ApplicationController
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
     # Update the coin
-    @transaction.coin.update(name: coin_name, symbol: coin_symbol, id: coin_id)
-    @transaction.coin.update(last_known_value: coin_price) if coin_price
-    
+    @transaction.coin = Coin.find_or_create_by(
+                            name: coin_name, 
+                            symbol: coin_symbol, 
+                            last_known_value: coin_price,
+                            id: coin_id)
+    binding.pry
     if @transaction.valid? && @transaction.user == current_user
       @transaction.save
       flash[:success] = "Transaction successfully updated!"
