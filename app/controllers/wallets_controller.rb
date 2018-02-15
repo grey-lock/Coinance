@@ -35,7 +35,7 @@ class WalletsController < ApplicationController
                             symbol: coin_symbol, 
                             last_known_value: coin_price,
                             id: coin_id)
-    # binding.pry
+    
     # Check if the wallet is valid, and the coin is valid
     if @wallet.valid? && @wallet.coin.valid?
       @wallet.coin.save
@@ -60,7 +60,7 @@ class WalletsController < ApplicationController
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
-    binding.pry
+
     # Find or Create the coin to associate
     @wallet.coin = Coin.find_or_create_by(
                             name: coin_name, 
@@ -69,9 +69,10 @@ class WalletsController < ApplicationController
                             id: coin_id)
     
     # Update the coin info
-    @wallet.coin.update(name: coin_name, symbol: coin_symbol)
+    @wallet.coin.update(name: coin_name, symbol: coin_symbol, id: coin_id)
     @wallet.coin.update(last_known_value: coin_price) if coin_price
     
+    binding.pry
     if @wallet.valid? && @wallet.user == current_user
       @wallet.coin.save
       @wallet.save

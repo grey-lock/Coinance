@@ -23,10 +23,10 @@ class TransactionsController < ApplicationController
     @transaction = current_user.transactions.build(transaction_params)
     
     # Split the coin name at parentheses
-    coin_info = params[:wallet][:coin].split(" ")
+    coin_info = params[:transaction][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
-    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
     # Create the coin to associate
@@ -50,18 +50,16 @@ class TransactionsController < ApplicationController
   
   def update
     @transaction.update(transaction_params)
-    # @wallet.update(wallet_params)
     
-    # Split the coin name at parentheses
+    # Split the coin name
     coin_info = params[:transaction][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
+    coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    # Assign the params to the coin
-    @transaction.coin.update(name: coin_name)
-    @transaction.coin.update(symbol: coin_symbol)
-    coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:transaction][:coin]
-    
+    # Update the coin
+    @transaction.coin.update(name: coin_name, symbol: coin_symbol, id: coin_id)
     @transaction.coin.update(last_known_value: coin_price) if coin_price
     
     if @transaction.valid? && @transaction.user == current_user
