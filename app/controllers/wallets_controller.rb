@@ -49,6 +49,9 @@ class WalletsController < ApplicationController
     coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
+    
+    @wallet.coin.last = Coin.find(params[:wallet][:coin])
     
     # Assign the params to the coin
     @wallet.coin.update(name: coin_name)
@@ -59,6 +62,12 @@ class WalletsController < ApplicationController
     
     if @wallet.valid? && @wallet.user == current_user
       @wallet.save
+      
+      
+      binding.pry
+      @wallet.transactions.last.coin = @wallet.coin
+      
+      Transaction.last.update(coin_id: @wallet.transactions.last.coin.id)
       flash[:success] = "Wallet successfully updated!"
       redirect_to user_wallets_path(current_user)
     else
