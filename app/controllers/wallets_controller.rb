@@ -29,14 +29,11 @@ class WalletsController < ApplicationController
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     
     @wallet.coin = Coin.new(name: coin_name, symbol: coin_symbol, last_known_value: coin_price)
-
-    # @wallet.coin.name = coin_name
-    # @wallet.coin.symbol = coin_symbol
-    # @wallet.coin.last_known_value = coin_price if coin_price
     
     if @wallet.valid?
-      binding.pry
       @wallet.save
+      @wallet.transactions.last.coin = @wallet.coin
+      Transaction.last.update(coin_id: @wallet.transactions.last.coin.id)
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
     else
@@ -100,7 +97,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
   end
   
 end

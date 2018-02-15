@@ -9,7 +9,9 @@
       <p class="mb-1">Coin: <%= @wallet.coin.name %></p>
       <p class="mb-1">Amount: <%= @wallet.coin_amount %> <%= @wallet.coin.symbol %></p>
       <p class="mb-1">Amount deposited: $<%= @wallet.user_deposit %></p>
+      <% if @wallet.transactions.last %>
       <p class="mb-1">Associated Transaction: <%= @wallet.transactions.last.id %></p>
+      <% end %>
     </div>
     <hr class="my-4">
     <div class="container">

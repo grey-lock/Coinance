@@ -25,7 +25,7 @@ class Wallet < ApplicationRecord
         transaction.user_id = self.user_id
         # transaction.wallet_id = self.id
         # transaction.coin = self.coin
-        self.transactions << transaction 
+        self.transactions << transaction
       else
         transaction = Transaction.find_by(id: transaction.id)
         self.transactions << transaction 
