@@ -27,6 +27,7 @@ class WalletsController < ApplicationController
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
+    coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
     @wallet.coin = Coin.new(name: coin_name, symbol: coin_symbol, last_known_value: coin_price)
     
@@ -50,8 +51,13 @@ class WalletsController < ApplicationController
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
+    coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    @wallet.coin.last = Coin.find(params[:wallet][:coin])
+    # Fix from here
+    
+    binding.pry
+    @coin = Coin.find_by(user_id: params[:user_id])
+    
     
     # Assign the params to the coin
     @wallet.coin.update(name: coin_name)

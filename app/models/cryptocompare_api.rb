@@ -18,8 +18,14 @@ class CryptocompareApi < ApplicationRecord
   end
   
   def self.find_coin_id(coinSym)
-    coin.downcase
-    Cryptocompare::CoinList.all['Data']["#{coin.upcase}"]['Id']
+    if coinSym && coinSym == coinSym.upcase
+      Cryptocompare::CoinList.all['Data']["#{coinSym}"]['Id']
+    elsif coinSym
+      coinSym = coinSym.upcase
+      Cryptocompare::CoinList.all['Data']["#{coinSym}"]['Id']
+    else
+      return
+    end
   end
   
   def self.last_known_value(coinSym)
