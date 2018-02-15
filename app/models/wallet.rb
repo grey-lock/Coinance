@@ -19,6 +19,7 @@ class Wallet < ApplicationRecord
   
   def transactions_attributes=(transactions_attributes)
     transactions_attributes.values.each do |tx_attr|
+      binding.pry
       if tx_attr[:id].nil?
         transaction = Transaction.new(tx_attr)
         transaction.user_id = self.user_id
