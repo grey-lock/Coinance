@@ -20,23 +20,25 @@ class TransactionsController < ApplicationController
   end
   
   def create
-      # binding.pry
     @transaction = current_user.transactions.build(transaction_params)
-    @transaction.coin = Coin.new
     
     # Split the coin name at parentheses
-    coin_info = params[:transaction][:coin].split(" ")
+    coin_info = params[:wallet][:coin].split(" ")
     coin_name = coin_info[0...-1].join(" ")
     coin_symbol = coin_info[-1].scan(/\w+(?!\w|\()/)[0]
-    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:transaction][:coin]
-  
-    # Assign the params to the coin
-    @transaction.coin.name = coin_name
-    @transaction.coin.symbol = coin_symbol
-    @transaction.coin.last_known_value = coin_price if coin_price
+    coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
+    coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    if @transaction.valid?
+    # Create the coin to associate
+    @transaction.coin = Coin.find_or_create_by(
+                            name: coin_name, 
+                            symbol: coin_symbol, 
+                            last_known_value: coin_price,
+                            id: coin_id)
+    
+    if @transaction.valid? && @transaction.coin.valid?
       @transaction.save
+      @transaction.coin.save
       flash[:success] = "Transaction successfully added!"
       redirect_to user_transactions_path(current_user)
     else
@@ -47,7 +49,6 @@ class TransactionsController < ApplicationController
   end
   
   def update
-    # binding.pry
     @transaction.update(transaction_params)
     # @wallet.update(wallet_params)
     

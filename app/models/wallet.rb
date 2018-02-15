@@ -6,7 +6,7 @@ class Wallet < ApplicationRecord
   delegate :coins, to: :transactions
   
   validates_associated :transactions, :message => "Transaction being added is invalid."
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :coin_amount, :user_deposit, format: { with: /\A\d{1,6}(.\d{0,4})?\z/  }, numericality: { greater_than_or_equal_to: 0.0000 }
   
   def wallet_params=(wallet_params)
@@ -27,7 +27,6 @@ class Wallet < ApplicationRecord
         self.transactions << transaction
       else
         transaction = Transaction.find_by(id: transaction.id)
-        binding.pry
         self.transactions << transaction 
       end
     end

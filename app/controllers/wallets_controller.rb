@@ -29,12 +29,20 @@ class WalletsController < ApplicationController
     coin_price = CryptocompareApi.last_known_value(coin_symbol) if params[:wallet][:coin]
     coin_id = CryptocompareApi.find_coin_id(coin_symbol)
     
-    @wallet.coin = Coin.new(name: coin_name, symbol: coin_symbol, last_known_value: coin_price)
-    
-    if @wallet.valid?
+    # Create the coin to associate
+    @wallet.coin = Coin.find_or_create_by(
+                            name: coin_name, 
+                            symbol: coin_symbol, 
+                            last_known_value: coin_price,
+                            id: coin_id)
+                            
+    # Check if the wallet is valid, and the coin is valid
+    if @wallet.valid? && @wallet.coin.valid?
       @wallet.save
+      @wallet.coin.save
+      
       @wallet.transactions.last.coin = @wallet.coin
-      Transaction.last.update(coin_id: @wallet.transactions.last.coin.id)
+      # @wallet.transactions.last.update(coin_id: coin_id)
       flash[:success] = "Wallet successfully added!"
       redirect_to user_wallets_path(current_user)
     else
@@ -56,17 +64,18 @@ class WalletsController < ApplicationController
     # Fix from here
     
     binding.pry
-    @coin = Coin.find_by(user_id: params[:user_id])
-    
+    @wallet.coin = Coin.find_or_create_by(
+                            name: coin_name, 
+                            symbol: coin_symbol, 
+                            last_known_value: coin_price,
+                            id: coin_id)
     
     # Assign the params to the coin
-    @wallet.coin.update(name: coin_name)
-    @wallet.coin.update(symbol: coin_symbol)
-    coin_price = CryptocompareApi.price_from_to(coin_symbol) if params[:wallet][:coin]
-    
+    @wallet.coin.update(name: coin_name, symbol: coin_symbol)
     @wallet.coin.update(last_known_value: coin_price) if coin_price
     
-    if @wallet.valid? && @wallet.user == current_user
+    if @wallet.valid? &&@wallet.user == current_user
+      @wallet.coin.save
       @wallet.save
       
       
