@@ -72,7 +72,7 @@ class WalletsController < ApplicationController
     @wallet.coin.update(name: coin_name, symbol: coin_symbol, id: coin_id)
     @wallet.coin.update(last_known_value: coin_price) if coin_price
     
-    binding.pry
+    
     if @wallet.valid? && @wallet.user == current_user
       @wallet.coin.save
       @wallet.save
@@ -119,7 +119,7 @@ class WalletsController < ApplicationController
   end
   
   def wallet_params
-    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :user_id, :coin_id, transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
+    params.require(:wallet).permit(:name, :coin_amount, :user_deposit, :notes, :user_id, :coin_id, transactions_attributes: [:id, :amount, :quantity, :price_per_coin, :fee, :user_id])
   end
   
 end

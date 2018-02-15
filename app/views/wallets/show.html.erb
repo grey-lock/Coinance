@@ -11,6 +11,7 @@
       <p class="mb-1">Amount deposited: $<%= @wallet.user_deposit %></p>
       <% if @wallet.transactions.last %>
       <p class="mb-1">Associated Transaction: <%= @wallet.transactions.last.id %></p>
+      <p class="mb-1">Notes: <%= @wallet.notes if @wallet.notes %> </p>
       <% end %>
     </div>
     <hr class="my-4">
