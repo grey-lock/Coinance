@@ -12,5 +12,4 @@ Rails.application.routes.draw do
   
   get '/coins/most_transactions' => 'coins#index'
  
-  
 end
