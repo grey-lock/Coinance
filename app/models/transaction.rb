@@ -1,4 +1,5 @@
 class Transaction < ApplicationRecord
+  has_many :comments
   belongs_to :user
   belongs_to :coin, optional: true
   belongs_to :wallet, optional: true
