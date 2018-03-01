@@ -28,6 +28,7 @@ class Wallet < ApplicationRecord
           self.transactions << transaction
         end
       else
+        # If wallet[transaction_attributes] exist, associate the transaction to the wallet
         transaction = Transaction.find_by(id: transaction.id)
         if transaction.valid? && self.valid?
           # transaction.save

@@ -8,6 +8,12 @@ class TransactionsController < ApplicationController
   def index
     # Find all of the current_user transactions
     @transactions = current_user.transactions
+    
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render json: @transactions }
+    end
+    
   end
   
   def show
