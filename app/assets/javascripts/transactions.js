@@ -12,3 +12,9 @@ function Transaction(props) {
   this.fee = props.fee
 }
 
+$(function() {
+  $('#show_tx').on('click', function() {
+    debugger
+  })
+})
+
