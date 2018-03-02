@@ -40,7 +40,7 @@ class WalletsController < ApplicationController
     if @wallet.valid? && @wallet.coin.valid?
       @wallet.coin.save
       @wallet.save
-      @tx = Transaction.find_by(wallet_id: @wallet.id)
+      @tx = Transaction.find_or_create_by(wallet_id: @wallet.id)
       @tx.coin = @wallet.coin
       @tx.save
       flash[:success] = "Wallet successfully added!"

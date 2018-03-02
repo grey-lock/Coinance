@@ -15,10 +15,7 @@
   
   <%= f.hidden_field :user_id, value: current_user.id %><br>
   
-  <%= f.label :transaction_id, "Select a transaction to associate this transaction to", class: "col-form-label" %> 
-  <%= f.collection_select :transactions, current_user.transactions, :id, :id, include_blank: true %><br>
-  
-  <p>Or create a new transaction here:</p>
+  <p>Create a new associated transaction here:</p>
   
   <%= f.fields_for :transactions, wallet.transactions.build do |tx| %>
   

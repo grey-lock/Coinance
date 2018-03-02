@@ -14,7 +14,7 @@ function Transaction(props) {
 
 $(function() {
   $('#show_tx').on('click', function() {
-    debugger
+    
   })
 })
 
