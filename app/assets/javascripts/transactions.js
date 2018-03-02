@@ -11,3 +11,4 @@ function Transaction(props) {
   this.price_per_coin = props.price_per_coin
   this.fee = props.fee
 }
+
