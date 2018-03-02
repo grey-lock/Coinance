@@ -10,7 +10,9 @@ class WalletsController < ApplicationController
   end
   
   def show
-    @wallet = Wallet.find(params[:id])
+    @wallet = Wallet.find_by(id: params[:id])
+    @tx = Transaction.find_by(wallet_id: params[:id])
+    # binding.pry
     # @tx = Transaction.find_by(id: @wallet.transactions.last.id)
   end
   
