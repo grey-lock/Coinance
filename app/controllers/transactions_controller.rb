@@ -6,10 +6,11 @@ class TransactionsController < ApplicationController
   before_action :user_is_current_user, only: [:show, :edit, :update, :destroy]
   
   def index
-    # Find all of the current_user transactions
+    # Find tx of the current_user 
     @transactions = current_user.transactions
     
     respond_to do |f|
+      # binding.pry
       f.html { render :index }
       f.json { render json: @transactions }
     end
@@ -18,6 +19,12 @@ class TransactionsController < ApplicationController
   
   def show
     @transaction = Transaction.find_by(id: params[:id])
+    
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @transaction }
+      
+    end
   end
   
   def new
