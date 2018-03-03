@@ -21,7 +21,8 @@ $(function() {
       url: this.href,
       dataType: "json"
     }).done(function(data) {
-      console.log(data)
+      debugger
+      $('#load_txs').append(JSON.stringify(data)) //without JSON.stringify it does not display
     })
   })
 })
