@@ -9,15 +9,12 @@
       <p class="mb-1">Coin: <%= @wallet.coin.name if @wallet.coin %></p>
       <p class="mb-1">Amount: <%= @wallet.coin_amount %> <%= @wallet.coin.symbol if @wallet.coin %></p>
       <p class="mb-1">Amount deposited: $<%= @wallet.user_deposit %></p>
-      <% if @wallet.transactions.last %>
-      <p class="mb-1">Associated Transaction: <%= link_to "Show", user_transaction_path(current_user, @tx), controller: 'transaction', action: 'show' %></p>
-      <% end %>
       <p class="mb-1">Notes: <%= @wallet.notes if @wallet.notes %> </p>
     </div>
     <hr class="my-4">
     <div class="container">
       <%= link_to "Transaction History",
-          "#",
+          user_transaction_path(current_user, @tx),
           id: "load_tx",
           class: "btn btn-primary btn-lg", role: "button" if current_user %>
           

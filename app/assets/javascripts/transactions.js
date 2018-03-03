@@ -13,8 +13,15 @@ function Transaction(props) {
 }
 
 $(function() {
-  $('#show_tx').on('click', function() {
-    
+  $('#load_tx').on('click', function(e) {
+    e.preventDefault()
+    debugger
+    $.ajax({
+      method: 'GET',
+      url: this.href
+    }).done(function(data) {
+      console.log(data)
+    })
   })
 })
 
