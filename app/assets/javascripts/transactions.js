@@ -20,9 +20,10 @@ $(function() {
       method: 'GET',
       url: this.href,
       dataType: "json"
-    }).done(function(data) {
-      debugger
-      $('#load_txs').append(JSON.stringify(data)) //without JSON.stringify it does not display
+    }).done(function(resp) {
+      // debugger
+      $('#load_txs').html(JSON.stringify(resp)) //without JSON.stringify it doesn't display
+      $(this).off("click");
     })
   })
 })
