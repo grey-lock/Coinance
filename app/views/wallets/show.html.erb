@@ -10,8 +10,10 @@
       <p class="mb-1">Amount: <%= @wallet.coin_amount %> <%= @wallet.coin.symbol if @wallet.coin %></p>
       <p class="mb-1">Amount deposited: $<%= @wallet.user_deposit %></p>
       <p class="mb-1">Notes: <%= @wallet.notes if @wallet.notes %> </p>
-      
-      <div id="load_txs" >Transactions:
+      <div class="container">
+        <div id="load_txs" >
+          <h5 class="mb-1">Transactions</h5>
+        </div>
       </div>
     </div>
     <hr class="my-4">

@@ -1,15 +1,15 @@
 // An important difference between function declarations and class declarations is that 
 // function declarations are hoisted and class declarations are not.
 
-function Transaction(props) {
-  this.id = props.id
-  this.user_id = props.user_id
-  this.wallet_id = props.wallet_id
-  this.coin_id = props.coin_id
-  this.amount = props.amount
-  this.quantity = props.quantity
-  this.price_per_coin = props.price_per_coin
-  this.fee = props.fee
+function Transaction(prop) {
+  this.id = prop.id
+  this.user_id = prop.user_id
+  this.wallet_id = prop.wallet_id
+  this.coin_id = prop.coin_id
+  this.amount = prop.amount
+  this.quantity = prop.quantity
+  this.price_per_coin = prop.price_per_coin
+  this.fee = prop.fee
 }
 
 $(function() {
