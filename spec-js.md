@@ -3,14 +3,22 @@
 Specs:
 - [x] Use jQuery for implementing new requirements
 - [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+  - users/show will load a tx index or
+  - users/show will load a wallet inndex
 - [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
+  -  users/show will load a tx show after a tx index is loaded or
+  -  users/show will load a wallet show after a wallet index is loaded
 - [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+  - users/show will show a tx comment when the show view has loaded
 - [ ] Use your Rails API and a form to create a resource and render the response without a page refresh.
+  - Transaction index will load a form to create a new transaction and append it to the DOKM
 - [ ] Translate JSON responses into js model objects.
+  - New transaction object will be instantiated and then appended to the DOM
 - [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
+  - Sort transactions?
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message
