@@ -31,9 +31,9 @@ $(function() {
 $(function() {
   $('.list-group-item').on('click', function(e) {
     e.preventDefault()
-    var template
-    var templateSource = $('#tx-show-template').html()
-    template = Handlebars.compile(templateSource)
+    var source = $('#tx-show-template').html()
+    template = Handlebars.compile(source)
+    
     
     $.ajax({
       method: 'GET',
@@ -41,7 +41,7 @@ $(function() {
       dataType: 'json'
     }).done(function(resp) {
       var id = resp.id
-      console.log(templateSource)
+      console.log(source)
       console.log(template)
       debugger
       var txResp = resp
