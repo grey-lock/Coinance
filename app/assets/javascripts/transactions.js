@@ -19,7 +19,7 @@ $(function() {
     $.ajax({
       method: 'GET',
       url: this.href,
-      dataType: "json"
+      dataType: 'json'
     }).done(function(resp) {
       // debugger
       $('#load_txs').append(JSON.stringify(resp)) //without JSON.stringify it doesn't display
@@ -31,11 +31,22 @@ $(function() {
 $(function() {
   $('.list-group-item').on('click', function(e) {
     e.preventDefault()
-    debugger
+    var template
+    var templateSource = $('#tx-show-template').html()
+    template = Handlebars.compile(templateSource)
     
-    var source = $('#tx-show-template').innerHTML
-    var template = Handlebars.compile(source)
-    $('.list-group-item').html(template)
+    $.ajax({
+      method: 'GET',
+      url: this.href,
+      dataType: 'json'
+    }).done(function(resp) {
+      var id = resp.id
+      console.log(templateSource)
+      console.log(template)
+      debugger
+      var txResp = resp
+      $(`#${id}`).append(txResp)
+    })
   })
 })
 

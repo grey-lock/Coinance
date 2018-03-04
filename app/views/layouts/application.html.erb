@@ -3,8 +3,7 @@
   <head>
     <title>Coinance</title>
     <%= csrf_meta_tags %>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> 
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_tag "$(document).ready(function(){
@@ -34,4 +33,5 @@
   </body>
   
   <%= render 'layouts/footer' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> 
 </html>
