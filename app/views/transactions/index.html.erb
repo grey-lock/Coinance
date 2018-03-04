@@ -8,7 +8,8 @@
       
     <% current_user.transactions.reverse.each do |tx| %>
       <%= link_to user_transaction_path(current_user, tx), 
-          class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+          class: "list-group-item list-group-item-action flex-column align-items-start",
+          id: "show_tx" do %>
       
         <h5 class="pull-right"><small class="text-muted"><%= tx.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
         
@@ -44,4 +45,11 @@
   <p class="mb-1">Coin price: {{ price_per_coin }}</p>
   <p class="mb-1">Transaction fee: {{ fee }}</p>
   <p class="mb-1">Created at: {{ created_at }}</p>
+</script>
+
+<script id="new-tx-form-template" type="text/x-handlebars-template">
+  
+  <form class="new_tx" id="new_tx" action="/users/{{user_id}}/transactions" method="post">
+  
+  </form>
 </script>

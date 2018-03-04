@@ -28,6 +28,20 @@ $(function() {
   })
 })
 
-function showTx() {
-  
-}
+$(function() {
+  $('.list-group-item').on('click', function(e) {
+    e.preventDefault()
+    debugger
+    
+    var source = $('#tx-show-template').innerHTML
+    var template = Handlebars.compile(source)
+    $('.list-group-item').html(template)
+  })
+})
+
+$(function() {
+  $('#tx_submit').on('submit', function(e) {
+    e.preventDefault()
+    
+  })
+})
