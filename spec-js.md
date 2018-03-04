@@ -3,13 +3,11 @@
 Specs:
 - [x] Use jQuery for implementing new requirements
 - [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
-  - users/show will load a tx index or
-  - users/show will load a wallet inndex
+  - Transactions index will load a comments show after a tx index is loaded
 - [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
-  -  users/show will load a tx show after a tx index is loaded or
-  -  users/show will load a wallet show after a wallet index is loaded
+  - wallet show view loads transaction index
 - [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
-  - users/show will show a tx comment when the show view has loaded
+  - Transaction index will show a tx comment when the show view has loaded
 - [ ] Use your Rails API and a form to create a resource and render the response without a page refresh.
   - Transaction index will load a form to create a new transaction and append it to the DOKM
 - [ ] Translate JSON responses into js model objects.
