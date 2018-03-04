@@ -22,7 +22,7 @@ $(function() {
       dataType: "json"
     }).done(function(resp) {
       // debugger
-      $('#load_txs').html(JSON.stringify(resp)) //without JSON.stringify it doesn't display
+      $('#load_txs').append(JSON.stringify(resp)) //without JSON.stringify it doesn't display
       $(this).off("click");
     })
   })

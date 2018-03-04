@@ -36,3 +36,12 @@
         class: "btn btn-primary btn-lg", role: "button" if current_user %>
   </p>
 </div>
+
+<script id="tx-show-template" type="text/x-handlebars-template">
+  <p class="mb-1">TxId: {{ id }}</p>
+  <p class="mb-1">Amount: {{ amount }}</p>
+  <p class="mb-1">Quantity: {{ quantity }}</p>
+  <p class="mb-1">Coin price: {{ price_per_coin }}</p>
+  <p class="mb-1">Transaction fee: {{ fee }}</p>
+  <p class="mb-1">Created at: {{ created_at }}</p>
+</script>
