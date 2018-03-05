@@ -8,7 +8,7 @@ class TransactionsController < ApplicationController
   def index
     # Find tx of the current_user 
     @transactions = current_user.transactions
-    
+    @transaction = Transaction.new
     respond_to do |f|
       # binding.pry
       f.html { render :index }

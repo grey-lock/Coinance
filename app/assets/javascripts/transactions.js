@@ -3,13 +3,14 @@
 
 function Transaction(prop) {
   this.id = prop.id
-  this.user_id = prop.user_id
-  this.wallet_id = prop.wallet_id
-  this.coin_id = prop.coin_id
+  this.user.id = prop.user.id
+  this.wallet.id = prop.wallet.id
+  this.coin.id = prop.coin.id
   this.amount = prop.amount
   this.quantity = prop.quantity
   this.price_per_coin = prop.price_per_coin
   this.fee = prop.fee
+  this.comment = prop.comment
 }
 
 // Loads and renders a wallets index of transactions
@@ -58,14 +59,13 @@ $(function() {
 $(function() {
   $('#add_tx').on('click', function(e) {
     e.preventDefault()
+    var source = $('#new-tx-form-template').html()
+    var template = Handlebars.compile(source)
+    var newForm = template()
     
-    $.ajax({
-      method: 'GET',
-      url: this.href,
-      dataType: 'json'
-    }).done(function(resp) {
+    $('#tx_list').before(function() {
       debugger
-      console.log(resp)
+      this.append(newForm)
     })
   })
 })

@@ -55,6 +55,5 @@
 </script>
 
 <script id="new-tx-form-template" type="text/x-handlebars-template">
-  
-
+  <%= render partial: 'transactions/form', locals: {transaction: @transaction, action: 'create'} %>
 </script>
