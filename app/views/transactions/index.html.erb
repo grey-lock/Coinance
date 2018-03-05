@@ -33,6 +33,12 @@
   <% end %>
   
   <hr class="my-4">
+  <div class="container" >
+    <p class="lead" id="new_tx_form">
+      
+    </p>
+  </div>
+  
   <p class="lead">
     <%= link_to "Add A New Transaction", new_user_transaction_path(current_user, @transaction),
         class: "btn btn-primary btn-lg",
@@ -42,7 +48,7 @@
 </div>
 
 <script id="tx-show-template" type="text/x-handlebars-template">
-  <div>
+  <div class="container lead">
     <p class="mb-1">TxId: {{ id }}</p>
     <p class="mb-1">Wallet Id: {{ wallet_id }}</p>
     <p class="mb-1">Coin Name: {{ coin.name }}</p>
@@ -55,5 +61,26 @@
 </script>
 
 <script id="new-tx-form-template" type="text/x-handlebars-template">
-  <%= render partial: 'transactions/form', locals: {transaction: @transaction, action: 'create'} %>
+  <%= form_for [current_user, @transaction], class: "form-group" do |f| %>
+
+  <%= f.label :coin, "Select Coin Type", class: "col-form-label" %>
+  <%= f.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
+  
+  <%= f.label "Amount Purchased (USD)", class: "col-form-label" %>
+  <%= f.number_field :amount, class: "form-control", min: 0, step: 0.0001 %><br>
+  
+  <%= f.label "Coin Quantity", class: "col-form-label"  %>
+  <%= f.number_field :quantity, class: "form-control", min: 0, step: 0.0001 %><br>
+  
+  <%= f.label "Price Per Coin (USD)", class: "col-form-label"  %>
+  <%= f.number_field :price_per_coin, class: "form-control", min: 0, step: 0.0001  %><br>
+  
+  <%= f.label "Exchange fee (if any)", class: "col-form-label"  %>
+  <%= f.number_field :fee, class: "form-control", min: 0, step: 0.0001  %><br>
+  
+  <%= f.hidden_field :user_id, value: current_user.id %>
+    
+  
+  <%= f.submit "Submit Transaction", class: "btn btn-primary", id: "tx_submit" %>
+<% end %>
 </script>

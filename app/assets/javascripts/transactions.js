@@ -61,14 +61,11 @@ $(function() {
     e.preventDefault()
     var source = $('#new-tx-form-template').html()
     var template = Handlebars.compile(source)
-    var newForm = template()
+    const newForm = template()
+    $('#new_tx_form').html(newForm)
     
-    $('#tx_list').before(function() {
-      debugger
-      this.append(newForm)
     })
   })
-})
 
 $(function() {
   $('#tx_submit').on('submit', function(e) {

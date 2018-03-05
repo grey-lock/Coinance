@@ -12,7 +12,8 @@ class TransactionsController < ApplicationController
     respond_to do |f|
       # binding.pry
       f.html { render :index }
-      f.json { render json: @transactions }
+      f.json { render json: { transactions: @transactions,
+                              transaction: @transaction }}
     end
     
   end
