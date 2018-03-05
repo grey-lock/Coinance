@@ -64,6 +64,7 @@ $(function() {
       url: this.href,
       dataType: 'json'
     }).done(function(resp) {
+      debugger
       console.log(resp)
     })
   })
@@ -72,6 +73,6 @@ $(function() {
 $(function() {
   $('#tx_submit').on('submit', function(e) {
     e.preventDefault()
-    
+    alert('Clicked submit!')
   })
 })

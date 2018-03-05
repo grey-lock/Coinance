@@ -31,7 +31,7 @@ class TransactionsController < ApplicationController
     @wallet = Wallet.new
     
     respond_to do |f|
-      f.html { render :new }
+      f.html { render :new, layout: false }
       f.json { render json: @transaction }
     end
   end
