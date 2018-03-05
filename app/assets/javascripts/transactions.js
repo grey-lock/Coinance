@@ -23,7 +23,7 @@ $(function() {
     }).done(function(resp) {
       // debugger
       $('#load_txs').append(JSON.stringify(resp)) //without JSON.stringify it doesn't display
-      $(this).off("click");
+      
     })
   })
 })
@@ -31,9 +31,6 @@ $(function() {
 $(function() {
   $('.list-group-item').on('click', function(e) {
     e.preventDefault()
-    var source = $('#tx-show-template').html()
-    template = Handlebars.compile(source)
-    
     
     $.ajax({
       method: 'GET',
@@ -41,12 +38,14 @@ $(function() {
       dataType: 'json'
     }).done(function(resp) {
       var id = resp.id
-      console.log(source)
-      console.log(template)
-      debugger
-      var txResp = resp
-      $(`#${id}`).append(txResp)
+      var source = $('#tx-show-template').html()
+      var template = Handlebars.compile(source)
+      var context = resp
+      var html = template(context)
+      
+      $(`#${id}`).append(html)
     })
+    $(this).off("click");
   })
 })
 
