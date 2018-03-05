@@ -28,8 +28,9 @@ $(function() {
   })
 })
 
+// Renders a tx show item from tx index
 $(function() {
-  $('.list-group-item').on('click', function(e) {
+  $('#tx_list > .list-group-item').on('click', function(e) {
     e.preventDefault()
     
     $.ajax({
