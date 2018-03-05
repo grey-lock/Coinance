@@ -64,7 +64,7 @@ $(function() {
       url: this.href,
       dataType: 'json'
     }).done(function(resp) {
-      
+      console.log(resp)
     })
   })
 })

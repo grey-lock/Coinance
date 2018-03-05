@@ -23,13 +23,17 @@ class TransactionsController < ApplicationController
     respond_to do |f|
       f.html { render :show }
       f.json { render json: @transaction }
-      
     end
   end
   
   def new
     @transaction = Transaction.new
     @wallet = Wallet.new
+    
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @transaction }
+    end
   end
   
   def create
@@ -53,11 +57,17 @@ class TransactionsController < ApplicationController
       @transaction.save
       @transaction.coin.save
       flash[:success] = "Transaction successfully added!"
-      redirect_to user_transactions_path(current_user)
+      respond_to do |f|
+        f.html { redirect_to user_transactions_path(current_user) }
+        f.json { render json: @transaction }
+      end
     else
       flash[:alert] = @transaction.errors.full_messages.to_sentence
       # Redirect preserves the visual formatting
-      redirect_to new_user_transaction_path(current_user)
+      respond_to do |f|
+        f.html { redirect_to new_user_transaction_path(current_user)}
+        f.json { render json: @transaction }
+      end
     end
   end
   
@@ -81,11 +91,17 @@ class TransactionsController < ApplicationController
     if @transaction.valid? && @transaction.user == current_user
       @transaction.save
       flash[:success] = "Transaction successfully updated!"
-      redirect_to user_transactions_path(current_user)
+      respond_to do |f|
+        f.html { redirect_to user_transactions_path(current_user) }
+        f.json { render json: @transaction }
+      end
     else
       flash[:alert] = @transaction.errors.full_messages.to_sentence
       # Redirect preserves the visual formatting
-      redirect_to user_transaction_path(current_user, @transaction)
+      respond_to do |f|
+        f.html { redirect_to user_transaction_path(current_user, @transaction)}
+        f.json { render json: @transaction }
+      end
     end
   end
   
