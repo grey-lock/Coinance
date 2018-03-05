@@ -12,6 +12,7 @@ function Transaction(prop) {
   this.fee = prop.fee
 }
 
+// Loads and renders a wallets index of transactions
 $(function() {
   $('#load_tx').on('click', function(e) {
     e.preventDefault()
@@ -21,14 +22,17 @@ $(function() {
       url: this.href,
       dataType: 'json'
     }).done(function(resp) {
-      // debugger
-      $('#load_txs').append(JSON.stringify(resp)) //without JSON.stringify it doesn't display
-      
+      var id = resp.id
+      var source = $('#wallet-tx-list-template').html()
+      var template = Handlebars.compile(source)
+      var context = resp
+      var html = template(context)
+      $('#load_txs').append(html)
     })
   })
 })
 
-// Renders a tx show item from tx index
+// Loads and renders a Transactions details show item on the transactions index page
 $(function() {
   $('#tx_list > .list-group-item').on('click', function(e) {
     e.preventDefault()
@@ -47,6 +51,21 @@ $(function() {
       $(`#${id}`).append(html)
     })
     $(this).off("click");
+  })
+})
+
+// This function will retrieve a new transaction form and render it
+$(function() {
+  $('#add_tx').on('click', function(e) {
+    e.preventDefault()
+    
+    $.ajax({
+      method: 'GET',
+      url: this.href,
+      dataType: 'json'
+    }).done(function(resp) {
+      
+    })
   })
 })
 

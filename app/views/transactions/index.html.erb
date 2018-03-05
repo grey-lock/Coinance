@@ -35,7 +35,9 @@
   <hr class="my-4">
   <p class="lead">
     <%= link_to "Add A New Transaction", new_user_transaction_path(current_user, @transaction),
-        class: "btn btn-primary btn-lg", role: "button" if current_user %>
+        class: "btn btn-primary btn-lg",
+        id: "add_tx",
+        role: "button" if current_user %>
   </p>
 </div>
 
@@ -54,7 +56,5 @@
 
 <script id="new-tx-form-template" type="text/x-handlebars-template">
   
-  <form class="new_tx" id="new_tx" action="/users/{{user_id}}/transactions" method="post">
-  
-  </form>
+
 </script>
