@@ -61,7 +61,7 @@
 </script>
 
 <script id="new-tx-form-template" type="text/x-handlebars-template">
-  <%= form_for [current_user, @transaction], class: "form-group" do |f| %>
+  <%= form_for [current_user, @transaction], class: "form-group", id: "tx_submit" do |f| %>
 
   <%= f.label :coin, "Select Coin Type", class: "col-form-label" %>
   <%= f.select :coin, Coin.all_coin_fullnames, class: "custom-select" %><br>
@@ -81,6 +81,6 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
     
   
-  <%= f.submit "Submit Transaction", class: "btn btn-primary", id: "tx_submit" %>
+  <%= f.submit "Submit Transaction", class: "btn btn-primary" %>
 <% end %>
 </script>

@@ -3,14 +3,14 @@
 
 function Transaction(prop) {
   this.id = prop.id
-  this.user.id = prop.user.id
-  this.wallet.id = prop.wallet.id
-  this.coin.id = prop.coin.id
+  this.user = prop.user
+  this.wallet = prop.wallet
+  this.coin = prop.coin
+  this.comments = prop.comments
   this.amount = prop.amount
+  this.fee = prop.fee
   this.quantity = prop.quantity
   this.price_per_coin = prop.price_per_coin
-  this.fee = prop.fee
-  this.comment = prop.comment
 }
 
 // Loads and renders a wallets index of transactions
@@ -68,11 +68,27 @@ $(function() {
   })
 
 // This will hijack the form submission to serialize the form data and create a new object
-// You need to select the empty parent container first in order to pass the 2nd arg of the new rendered item
+// You need to select the empty parent container first in order to pass the 2nd arg of the new rendered form id
 
 $(function() {
-  $('#new_tx_form').on('click', '#tx_submit', function (e) { 
-    e.preventDefault() 
-    debugger 
+  $('#new_tx_form').on('submit', '#new_transaction', function (e) { 
+    e.preventDefault()
+    var $form = $(this)
+    var action = $form.attr('action')
+    var params = $form.serialize()
+    
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: 'json',
+      method: 'POST'
+      })
+      .done(function(data) {
+        var tx = new Transaction(data)
+        
+      })
+      .on('error', function(resp) {
+        alert('Form failed to submit successfully. Check your inputs.')
+      })
   }) 
 })
