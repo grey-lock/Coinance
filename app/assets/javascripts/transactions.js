@@ -55,6 +55,7 @@ $(function() {
   })
 })
 
+
 // This function will retrieve a new transaction form and render it
 $(function() {
   $('#add_tx').on('click', function(e) {
@@ -63,13 +64,15 @@ $(function() {
     var template = Handlebars.compile(source)
     const newForm = template()
     $('#new_tx_form').html(newForm)
-    
     })
   })
 
+// This will hijack the form submission to serialize the form data and create a new object
+// You need to select the empty parent container first in order to pass the 2nd arg of the new rendered item
+
 $(function() {
-  $('#tx_submit').on('submit', function(e) {
-    e.preventDefault()
-    alert('Clicked submit!')
-  })
+  $('#new_tx_form').on('click', '#tx_submit', function (e) { 
+    e.preventDefault() 
+    debugger 
+  }) 
 })
