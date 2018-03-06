@@ -13,8 +13,13 @@ function Transaction(prop) {
   this.price_per_coin = prop.price_per_coin
 }
 
+$(function() {
+  Transaction.templateSource = $('#tx-list-template').html(),
+  Transaction.template = Handlebars.compile(Transaction.templateSource)
+})
+
 Transaction.prototype.renderTx = function () {
-  
+  return Transaction.template(this) 
 }
 
 // Loads and renders a wallets index of transactions
@@ -91,10 +96,9 @@ $(function() {
       })
       .done(function(data) {
         var tx = new Transaction(data)
+        var listTx = tx.renderTx()
         
-      })
-      .on('error', function(resp) {
-        alert('Form failed to submit successfully. Check your inputs.')
+        $('#tx-show').append(listTx)
       })
   }) 
 })
