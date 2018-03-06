@@ -9,10 +9,12 @@ class TransactionsController < ApplicationController
     # Find tx of the current_user 
     @transactions = current_user.transactions
     @transaction = Transaction.new
+    @tx = Transaction.find_by(id: params[:user_id])
     respond_to do |f|
-      # binding.pry
+      binding.pry
       f.html { render :index }
-      f.json { render json: { transactions: @transactions,
+      f.json { render json: { tx: @tx,
+                              transactions: @transactions,
                               transaction: @transaction }}
     end
     

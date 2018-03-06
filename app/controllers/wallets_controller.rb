@@ -13,7 +13,6 @@ class WalletsController < ApplicationController
     @wallet = Wallet.find_by(id: params[:id])
     @tx = Transaction.find_by(wallet_id: params[:id])
     # binding.pry
-    # @tx = Transaction.find_by(id: @wallet.transactions.last.id)
   end
   
   def new
@@ -33,10 +32,11 @@ class WalletsController < ApplicationController
     
     # Find or Create the coin to associate
     @wallet.coin = Coin.find_or_create_by(
+                            id: coin_id,
                             name: coin_name, 
                             symbol: coin_symbol, 
-                            last_known_value: coin_price,
-                            id: coin_id)
+                            last_known_value: coin_price
+                            )
     
     # Check if the wallet is valid, and the coin is valid
     if @wallet.valid? && @wallet.coin.valid?

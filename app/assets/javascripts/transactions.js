@@ -27,10 +27,10 @@ $(function() {
       url: this.href,
       dataType: 'json'
     }).done(function(resp) {
-      var id = resp.id
+      var id = resp.tx.id
       var source = $('#wallet-tx-list-template').html()
       var template = Handlebars.compile(source)
-      var context = resp
+      var context = resp.tx
       var html = template(context)
       debugger
       $('#load_txs').append(html)
