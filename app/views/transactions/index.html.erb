@@ -5,7 +5,7 @@
         <% if current_user && !current_user.transactions.empty? %>
   
     <hr class="my-4">
-    <div class="list-group" id="tx_list">
+    <div class="list-group" id="tx-list">
       
     <% current_user.transactions.reverse.each do |tx| %>
       <%= link_to user_transaction_path(current_user, tx), 
@@ -91,7 +91,7 @@
     <% if current_user && !current_user.transactions.empty? %>
   
     <hr class="my-4">
-    <div class="list-group" id="tx_list">
+    <div class="list-group" id="tx-list-temp">
       
     <% current_user.transactions.reverse.each do |tx| %>
       <%= link_to user_transaction_path(current_user, tx), 

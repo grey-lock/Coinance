@@ -11,15 +11,44 @@ function Transaction(prop) {
   this.fee = prop.fee
   this.quantity = prop.quantity
   this.price_per_coin = prop.price_per_coin
+  
 }
 
-$(function() {
-  Transaction.templateSource = $('#tx-list-template').html(),
-  Transaction.template = Handlebars.compile(Transaction.templateSource)
-})
+// Upon successful form submission, append new item to the template
+
 
 Transaction.prototype.renderTx = function () {
   return Transaction.template(this) 
+}
+
+// This will hijack the form submission to serialize the form data and create a new object
+// You need to select the empty parent container first in order to pass the 2nd arg of the new rendered form id
+
+Transaction.formSubmitListener = function() {
+  $('#new_tx_form').on('submit', '#new_transaction', function (e) { 
+    e.preventDefault()
+    var $form = $(this)
+    var action = $form.attr('action')
+    var params = $form.serialize()
+    
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: 'json',
+      method: 'POST'
+      })
+      .done(function(data) {
+        var tx = new Transaction(data)
+        var listTx = tx.renderTx()
+        $(listTx).insertBefore('#tx-list')
+      })
+  })
+}
+
+Transaction.ready = function() {
+  Transaction.templateSource = $('#tx-list-template').html(),
+  Transaction.template = Handlebars.compile(Transaction.templateSource)
+  Transaction.formSubmitListener()
 }
 
 // Loads and renders a wallets index of transactions
@@ -33,7 +62,6 @@ $(function() {
       dataType: 'json'
     }).done(function(resp) {
       resp = resp.tx
-      debugger
       
       var source = $('#wallet-tx-list-template').html()
       var template = Handlebars.compile(source)
@@ -78,29 +106,7 @@ $(function() {
     })
   })
 
-// This will hijack the form submission to serialize the form data and create a new object
-// You need to select the empty parent container first in order to pass the 2nd arg of the new rendered form id
 
 $(function() {
-  $('#new_tx_form').on('submit', '#new_transaction', function (e) { 
-    e.preventDefault()
-    var $form = $(this)
-    var action = $form.attr('action')
-    var params = $form.serialize()
-    
-    $.ajax({
-      url: action,
-      data: params,
-      dataType: 'json',
-      method: 'POST'
-      })
-      .done(function(data) {
-        var tx = new Transaction(data)
-        var listTx = tx.renderTx()
-        
-        $('#tx-show').append(listTx)
-      })
-  }) 
+  Transaction.ready()
 })
-
-
