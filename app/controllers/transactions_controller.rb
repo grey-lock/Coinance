@@ -11,11 +11,12 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     @tx = Transaction.find_by(id: params[:user_id])
     respond_to do |f|
-      binding.pry
+      # binding.pry
       f.html { render :index }
       f.json { render json: { tx: @tx,
                               transactions: @transactions,
-                              transaction: @transaction }}
+                              transaction: @transaction }
+      }
     end
     
   end

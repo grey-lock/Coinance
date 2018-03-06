@@ -3,6 +3,6 @@ class TransactionSerializer < ActiveModel::Serializer
   has_many :comments
   belongs_to :coin
   belongs_to :user
-  belongs_to :wallet, optional: true
+  belongs_to :wallet
   
 end
