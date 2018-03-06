@@ -13,6 +13,10 @@ function Transaction(prop) {
   this.price_per_coin = prop.price_per_coin
 }
 
+Transaction.prototype.renderTx = function () {
+  
+}
+
 // Loads and renders a wallets index of transactions
 $(function() {
   $('#load_tx').on('click', function(e) {
@@ -28,6 +32,7 @@ $(function() {
       var template = Handlebars.compile(source)
       var context = resp
       var html = template(context)
+      debugger
       $('#load_txs').append(html)
     })
   })
@@ -92,3 +97,5 @@ $(function() {
       })
   }) 
 })
+
+
