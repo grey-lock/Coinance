@@ -99,13 +99,13 @@
           id: tx.id,
           data: {id: tx.id } do %>
       
-        <h5 class="pull-right"><small class="text-muted"><%= tx.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
+        <h5 class="pull-right"><small class="text-muted">{{ created_at }}</small></h5>
         
-        <p class="mb-1">Coin: <%= tx.coin.name if tx.coin %></p>
-        <p class="mb-1">Amount: <%= tx.amount %></p>
-        <p class="mb-1">Quantity: <%= tx.quantity %> <%= tx.coin.symbol if tx.coin%></p>
-        <p class="mb-1">Coin price: $<%= tx.price_per_coin %></p>
-        <p class="mb-1">Transaction fee: $<%= tx.fee %></p>
+        <p class="mb-1">Coin: {{ coin.name }}</p>
+        <p class="mb-1">Amount: {{ amount }}</p>
+        <p class="mb-1">Quantity: {{ quantity }} {{coin.symbol}}</p>
+        <p class="mb-1">Coin price: ${{ price_per_coin }}</p>
+        <p class="mb-1">Transaction fee: ${{ fee }}</p>
         
        <% end %>
     <% end %>
@@ -118,4 +118,10 @@
     <p class="lead">You have not created any transactions. Please add a new transaction below.</p>
     
   <% end %>
+</script>
+
+<script id="new-tx-item" type="text/x-handlebars-template">
+  
+  
+  
 </script>

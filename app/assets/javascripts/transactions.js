@@ -40,7 +40,7 @@ Transaction.formSubmitListener = function() {
       .done(function(data) {
         var tx = new Transaction(data)
         var listTx = tx.renderTx()
-        $(listTx).insertBefore('#tx-list')
+        $('#tx-list').append(listTx)
       })
   })
 }
