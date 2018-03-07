@@ -50,16 +50,22 @@
 </div>
 
 <script id="tx-show-template" type="text/x-handlebars-template">
-  <div class="container lead">
-    <p class="mb-1">TxId: {{ id }}</p>
-    <p class="mb-1">Wallet Id: {{ wallet_id }}</p>
-    <p class="mb-1">Coin Name: {{ coin.name }}</p>
-    <p class="mb-1">Amount: {{ amount }}</p>
-    <p class="mb-1">Quantity: {{ quantity }} {{ coin.symbol }}</p>
-    <p class="mb-1">Coin price: $ {{ price_per_coin }}</p>
-    <p class="mb-1">Transaction fee: ${{ fee }}</p>
-    <p class="mb-1">Created at: {{ created_at }}</p>
+  <div class="list-group">
+  <div class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Your Transaction</h5>
+      <small class="text-muted">Last Updated: {{updated_at}}</small>
+    </div>
+    <div class="container">
+      <p class="mb-1">Coin: {{coin.name}}</p>
+      <p class="mb-1">Amount: {{amount}}</p>
+      <p class="mb-1">Quantity: {{quantity}} {{coin.symbol}}</p>
+      <p class="mb-1">Coin price: ${{price_per_coin}}</p>
+      <p class="mb-1">Most recent price: ${{coin.last_known_value}}</p>
+      <p class="mb-1">Transaction fee: ${{fee}}</p>
+    </div>
   </div>
+</div>
 </script>
 
 <script id="new-tx-form-template" type="text/x-handlebars-template">

@@ -43,9 +43,9 @@ Transaction.formSubmitListener = function() {
         console.log("tx: ", tx)
         var listTx = tx.renderTx()
         console.log("listTx: ", listTx)
-        // $('#tx-list-temp').html(listTx)
-        
-        $('#tx-list').before(listTx)
+        var newTx = $('#tx-list-temp').html(listTx)
+        console.log('newTx:', newTx)
+        $('#tx-list-temp').append((newTx))
       })
   })
 }
