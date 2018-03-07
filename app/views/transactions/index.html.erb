@@ -90,7 +90,6 @@
 <script id="tx-list-template" type="text/x-handlebars-template">
     <% if current_user && !current_user.transactions.empty? %>
   
-    <hr class="my-4">
     <div class="list-group" id="tx-list-temp">
       
     <% current_user.transactions.reverse.each do |tx| %>
@@ -99,7 +98,7 @@
           id: tx.id,
           data: {id: tx.id } do %>
       
-        <h5 class="pull-right"><small class="text-muted">{{ created_at }}</small></h5>
+        <h5 class="pull-right"><small class="text-muted"><%= tx.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
         
         <p class="mb-1">Coin: {{ coin.name }}</p>
         <p class="mb-1">Amount: {{ amount }}</p>

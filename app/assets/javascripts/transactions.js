@@ -39,8 +39,12 @@ Transaction.formSubmitListener = function() {
       })
       .done(function(data) {
         var tx = new Transaction(data)
+        console.log(tx)
         var listTx = tx.renderTx()
-        $('#tx-list').append(listTx)
+        console.log(listTx)
+        $('#tx-list-temp').empty()
+        
+        $('#tx-list').prepend(listTx)
       })
   })
 }
@@ -49,6 +53,7 @@ Transaction.ready = function() {
   Transaction.templateSource = $('#tx-list-template').html(),
   Transaction.template = Handlebars.compile(Transaction.templateSource)
   Transaction.formSubmitListener()
+  
 }
 
 // Loads and renders a wallets index of transactions
