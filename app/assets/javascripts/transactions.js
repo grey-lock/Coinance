@@ -39,12 +39,13 @@ Transaction.formSubmitListener = function() {
       })
       .done(function(data) {
         var tx = new Transaction(data)
-        console.log(tx)
+        deleteForm()
+        console.log("tx: ", tx)
         var listTx = tx.renderTx()
-        console.log(listTx)
-        $('#tx-list-temp').empty()
+        console.log("listTx: ", listTx)
+        // $('#tx-list-temp').html(listTx)
         
-        $('#tx-list').prepend(listTx)
+        $('#tx-list').before(listTx)
       })
   })
 }
@@ -79,7 +80,7 @@ $(function() {
 
 // Loads and renders a Transactions details show item on the transactions index page
 $(function() {
-  $('#tx_list > .list-group-item').on('click', function(e) {
+  $('#tx-list > .list-group-item').on('click', function(e) {
     e.preventDefault()
     
     $.ajax({
@@ -110,6 +111,10 @@ $(function() {
     $('#new_tx_form').html(newForm)
     })
   })
+  
+function deleteForm(){
+    $("#new_transaction").empty();
+}
 
 
 $(function() {

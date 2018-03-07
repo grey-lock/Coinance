@@ -54,8 +54,7 @@ class TransactionsController < ApplicationController
     @transaction.coin = Coin.find_or_create_by(
                             name: coin_name, 
                             symbol: coin_symbol, 
-                            last_known_value: coin_price,
-                            id: coin_id)
+                            last_known_value: coin_price)
     
     if @transaction.valid? && @transaction.coin.valid?
       @transaction.save
