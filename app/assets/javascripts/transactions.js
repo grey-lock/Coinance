@@ -17,8 +17,6 @@ function Transaction(prop) {
 }
 
 // Upon successful form submission, append new item to the template
-
-
 Transaction.prototype.renderTx = function () {
   // debugger
   return Transaction.template(this) 
@@ -45,20 +43,16 @@ Transaction.formSubmitListener = function() {
         deleteForm()
         // console.log("tx: ", tx)
         var listTx = tx.renderTx()
-        console.log("listTx: ", listTx)
-        // var newTx = $('#tx-list-temp').html(listTx)
-        // console.log('newTx:', newTx)
-        debugger
         $('#tx-list').before((listTx))
       })
   })
 }
 
+// Model object method to compile the handlebars templates
 Transaction.ready = function() {
   Transaction.templateSource = $('#tx-list-template').html(),
   Transaction.template = Handlebars.compile(Transaction.templateSource)
   Transaction.formSubmitListener()
-  
 }
 
 // Loads and renders a wallets index of transactions
@@ -116,11 +110,12 @@ $(function() {
     })
   })
   
+// This deletes the new tx form on form submit
 function deleteForm(){
     $("#new_transaction").empty();
 }
 
-
+// This will ready all of the templates on document.ready
 $(function() {
   Transaction.ready()
 })
