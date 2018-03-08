@@ -3,7 +3,7 @@
 <h1>Your Portfolio</h1>
 
 <div class="list-group">
-  <a href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a id="user-tx" href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Transactions</h5>
       <% if current_user.transactions.any? %>
@@ -14,7 +14,7 @@
   
   <br>
   
-  <a href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a id="user-wallet" href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Wallets</h5>
       <% if current_user.wallets.any? %>
