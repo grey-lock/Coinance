@@ -11,6 +11,8 @@ function Transaction(prop) {
   this.fee = prop.fee
   this.quantity = prop.quantity
   this.price_per_coin = prop.price_per_coin
+  this.created_at = prop.created_at
+  this.updated_at = prop.updated_at
   
 }
 
