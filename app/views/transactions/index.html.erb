@@ -94,16 +94,14 @@
 </script>
 
 <script id="tx-list-template" type="text/x-handlebars-template">
+
     <% if current_user && !current_user.transactions.empty? %>
   
     <div class="list-group" id="tx-list-temp">
       
-    <% current_user.transactions.reverse.each do |tx| %>
-      <%= link_to user_transaction_path(current_user, tx), 
-          class: "list-group-item list-group-item-action flex-column align-items-start",
-          id: tx.id,
-          data: {id: tx.id } do %>
-      
+      <%#= link_to user_transaction_path(current_user.id, id), 
+        #  class: "list-group-item list-group-item-action flex-column align-items-start"%>
+      <a href="/users/{{user.id}}/transactions/{{id}}" class="list-group-item list-group-item-action flex-column align-items-start">
         <h5 class="pull-right"><small class="text-muted">{{ updated_at }}</small></h5>
         
         <p class="mb-1">Coin: {{ coin.name }}</p>
@@ -111,9 +109,9 @@
         <p class="mb-1">Quantity: {{ quantity }} {{coin.symbol}}</p>
         <p class="mb-1">Coin price: ${{ price_per_coin }}</p>
         <p class="mb-1">Transaction fee: ${{ fee }}</p>
+        </a>
         
-       <% end %>
-    <% end %>
+       
     
     </div>
     

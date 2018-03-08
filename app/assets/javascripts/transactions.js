@@ -18,6 +18,7 @@ function Transaction(prop) {
 
 
 Transaction.prototype.renderTx = function () {
+  // debugger
   return Transaction.template(this) 
 }
 
@@ -43,8 +44,9 @@ Transaction.formSubmitListener = function() {
         // console.log("tx: ", tx)
         var listTx = tx.renderTx()
         console.log("listTx: ", listTx)
-        var newTx = $('#tx-list-temp').html(listTx)
-        console.log('newTx:', newTx)
+        // var newTx = $('#tx-list-temp').html(listTx)
+        // console.log('newTx:', newTx)
+        debugger
         $('#tx-list').before((listTx))
       })
   })
