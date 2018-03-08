@@ -3,7 +3,7 @@
 <h1>Your Portfolio</h1>
 
 <div class="list-group">
-  <a id="user-tx" href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a id="user-txs" href="<%= user_transactions_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Transactions</h5>
       <% if current_user.transactions.any? %>
@@ -11,10 +11,14 @@
       <% end %>
     </div>
   </a>
+  <div class="container" id='load_txs'>
+
+  </div>
+
   
   <br>
   
-  <a id="user-wallet" href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a id="user-wallets" href="<%= user_wallets_path(current_user) %>" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Wallets</h5>
       <% if current_user.wallets.any? %>
@@ -22,12 +26,15 @@
       <% end %>
     </div>
   </a>
+  <div class="container" id='load_wallets'>
+
+  </div>
 </div>
 
 <% end %>
 
 <script id="tx-list-template" type="text/x-handlebars-template">
-  
+    {{#each this}}
     <% if current_user && !current_user.transactions.empty? %>
   
     <div class="list-group" id="tx-list-temp">
@@ -43,7 +50,7 @@
         </a>
         
     </div>
-    
+    {{/each}}
   <% else %>
   
     <hr class="my-4">
@@ -53,7 +60,7 @@
 </script>
 
 <script id="wallet-list-template" type="text/x-handlebars-template">
-    
+    {{#each this}}
     <% if current_user && !current_user.wallets.empty? %>
   
     <div class="list-group" id="wallet-list-temp">
@@ -65,11 +72,11 @@
         <p class="mb-1">Coin: {{ coin.name }}</p>
         <p class="mb-1">Amount: {{ coin_amount }} {{coin.symbol}}</p>
         <p class="mb-1">Amount deposited: ${{ user_deposit }}</p>
-        <p class="mb-1">Notes: ${{ notes }}</p>
+        <p class="mb-1">Notes: {{ notes }}</p>
         </a>
         
     </div>
-    
+    {{/each}}
   <% else %>
   
     <hr class="my-4">

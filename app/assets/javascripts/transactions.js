@@ -68,6 +68,47 @@ Transaction.ready = function() {
   Transaction.formSubmitListener()
 }
 
+//Load a users list of transactions
+$(function() {
+  $('#user-txs').on('click', function(e) {
+    e.preventDefault()
+    
+    $.ajax({
+      method: 'GET',
+      url: this.url,
+      dataType: 'json'
+    })
+    .done(function(resp) {
+      var source = $('#tx-list-template').html()
+      var template = Handlebars.compile(source)
+      var context = resp
+      var html = template(context)
+      $('#load_txs').append(html)
+    })
+  })
+})
+
+//Load a users list of wallets
+$(function() {
+  $('#user-wallets').on('click', function(e) {
+    e.preventDefault()
+    
+    $.ajax({
+      method: 'GET',
+      url: this.url,
+      dataType: 'json'
+    })
+    .done(function(resp) {
+      debugger
+      var source = $('#wallet-list-template').html()
+      var template = Handlebars.compile(source)
+      var context = resp
+      var html = template(context)
+      $('#load_wallets').append(html)
+    })
+  })
+})
+
 // Loads and renders a wallets index of transactions
 $(function() {
   $('#load_tx').on('click', function(e) {
