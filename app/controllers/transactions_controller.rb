@@ -9,14 +9,14 @@ class TransactionsController < ApplicationController
     # Find tx of the current_user 
     @transactions = current_user.transactions
     @transaction = Transaction.new
-    @tx = Transaction.find_by(id: params[:user_id])
+    @tx = Transaction.find_by(id: params[:id])
     respond_to do |f|
       # binding.pry
-      f.html { render :index }
       f.json { render json: { tx: @tx,
                               transactions: @transactions,
                               transaction: @transaction }
       }
+      f.html { render :index }
     end
     
   end
@@ -136,7 +136,7 @@ class TransactionsController < ApplicationController
   end
   
   def transaction_params
-    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, coin: [:name, :symbol, :last_known_value], wallet: [:id, :name, :coin_amount, :user_deposit])
+    params.require(:transaction).permit(:amount, :quantity, :price_per_coin, :fee, :coin_id, :user_id, coin: [:name, :symbol, :last_known_value], wallet: [:id, :name, :coin_amount, :user_deposit])
   end
   
 end

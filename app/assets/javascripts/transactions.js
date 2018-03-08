@@ -40,12 +40,12 @@ Transaction.formSubmitListener = function() {
       .done(function(data) {
         var tx = new Transaction(data)
         deleteForm()
-        console.log("tx: ", tx)
+        // console.log("tx: ", tx)
         var listTx = tx.renderTx()
         console.log("listTx: ", listTx)
         var newTx = $('#tx-list-temp').html(listTx)
         console.log('newTx:', newTx)
-        $('#tx-list-temp').append((newTx))
+        $('#tx-list').before((listTx))
       })
   })
 }

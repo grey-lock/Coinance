@@ -104,7 +104,7 @@
           id: tx.id,
           data: {id: tx.id } do %>
       
-        <h5 class="pull-right"><small class="text-muted"><%= tx.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></small></h5>
+        <h5 class="pull-right"><small class="text-muted">{{ updated_at }}</small></h5>
         
         <p class="mb-1">Coin: {{ coin.name }}</p>
         <p class="mb-1">Amount: {{ amount }}</p>
