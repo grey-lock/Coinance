@@ -16,6 +16,19 @@ function Transaction(prop) {
   
 }
 
+function Wallet(prop) {
+  this.id = prop.id
+  this.name = prop.name
+  this.coin_amount = prop.coin_amount
+  this.user_deposit = prop.user_deposit
+  this.notes = prop.notes
+  this.created_at = prop.created_at
+  this.updated_at = prop.updated_at
+  this.user = prop.user
+  this.coin = prop.coin
+  this.transactions = prop.transactions
+}
+
 // Upon successful form submission, append new item to the template
 Transaction.prototype.renderTx = function () {
   // debugger
