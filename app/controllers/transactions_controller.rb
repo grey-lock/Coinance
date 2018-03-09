@@ -9,7 +9,7 @@ class TransactionsController < ApplicationController
     # Find tx of the current_user 
     @transactions = current_user.transactions
     @transaction = Transaction.new
-    @tx = Transaction.find_by(id: params[:id])
+    @tx = Transaction.find_by(user_id: params[:user_id])
     respond_to do |f|
       # binding.pry
       f.json { render json: { tx: @tx,
@@ -90,7 +90,7 @@ class TransactionsController < ApplicationController
                             symbol: coin_symbol, 
                             last_known_value: coin_price,
                             id: coin_id)
-    binding.pry
+    
     if @transaction.valid? && @transaction.user == current_user
       @transaction.save
       flash[:success] = "Transaction successfully updated!"

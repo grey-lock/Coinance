@@ -6,8 +6,9 @@ class UsersController < ApplicationController
     @txs = current_user.transactions
     respond_to do |f|
       f.html { render :show}
-      f.json { render json: @wallets,
-                      json: @txs
+      # binding.pry
+      f.json { render json: { wallets: @wallets,
+                              txs: @txs}, include: [:coin, :user]
       }
     end
   end

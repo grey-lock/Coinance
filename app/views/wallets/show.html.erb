@@ -11,17 +11,13 @@
       <p class="mb-1">Amount deposited: $<%= @wallet.user_deposit %></p>
       <p class="mb-1">Notes: <%= @wallet.notes if @wallet.notes %> </p><br>
       <div class="container">
-        <div id="load_txs" >
-          <h5 class="mb-1">Transactions</h5>
-        </div>
+        <!--<div id="load_txs" >-->
+        <!--  <h5 class="mb-1">Transactions</h5>-->
+        <!--</div>-->
       </div>
     </div>
     <hr class="my-4">
     <div class="container">
-      <%= link_to "Transaction History",
-          user_transactions_path(@tx),
-          id: "load_tx",
-          class: "btn btn-primary btn-lg", role: "button" if current_user %>
           
       <%= link_to "Edit", 
           edit_user_wallet_path(current_user, @wallet),

@@ -81,7 +81,7 @@ $(function() {
     .done(function(resp) {
       var source = $('#tx-list-template').html()
       var template = Handlebars.compile(source)
-      var context = resp
+      var context = resp.txs
       var html = template(context)
       $('#load_txs').append(html)
     })
@@ -99,10 +99,9 @@ $(function() {
       dataType: 'json'
     })
     .done(function(resp) {
-      debugger
       var source = $('#wallet-list-template').html()
       var template = Handlebars.compile(source)
-      var context = resp
+      var context = resp.wallets
       var html = template(context)
       $('#load_wallets').append(html)
     })
