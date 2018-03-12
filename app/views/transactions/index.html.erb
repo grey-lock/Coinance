@@ -6,6 +6,7 @@
   
     <hr class="my-4">
     <div class="list-group" id="tx-list">
+    
       
     <% current_user.transactions.reverse.each do |tx| %>
       <%= link_to user_transaction_path(current_user, tx), 
@@ -54,7 +55,7 @@
   <div class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Your Transaction</h5>
-      <small class="text-muted">Last Updated: {{updated_at}}</small>
+      <small class="text-muted">Last Updated: {{updatedAt}}</small>
     </div>
     <div class="container">
       <p class="mb-1">Coin: {{coin.name}}</p>
@@ -102,7 +103,7 @@
       <%#= link_to user_transaction_path(current_user.id, id), 
         #  class: "list-group-item list-group-item-action flex-column align-items-start"%>
       <a href="/users/{{user.id}}/transactions/{{id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-        <h5 class="pull-right"><small class="text-muted">{{ updated_at }}</small></h5>
+        <h5 class="pull-right"><small class="text-muted">{{ updatedAt }}</small></h5>
         
         <p class="mb-1">Coin: {{ coin.name }}</p>
         <p class="mb-1">Amount: {{ amount }}</p>

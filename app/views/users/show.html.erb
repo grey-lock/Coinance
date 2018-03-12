@@ -12,6 +12,7 @@
     </div>
   </a>
   <div class="container" id='load_txs'>
+      <a href='#' id="sort_tx_fee">Sort by Transaction fee</a>
 
   </div>
 
@@ -40,7 +41,7 @@
     <div class="list-group" id="tx-list-temp">
       
       <a href="/users/{{user.id}}/transactions/{{id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-        <h5 class="pull-right"><small class="text-muted">{{ updated_at }}</small></h5>
+        <h5 class="pull-right"><small class="text-muted">{{ updatedAt }}</small></h5>
         
         <p class="mb-1">Coin: {{ coin.name }}</p>
         <p class="mb-1">Amount: {{ amount }}</p>
@@ -66,7 +67,7 @@
     <div class="list-group" id="wallet-list-temp">
       
       <a href="/users/{{user.id}}/wallets/{{id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-        <h5 class="pull-right"><small class="text-muted">{{ updated_at }}</small></h5>
+        <h5 class="pull-right"><small class="text-muted">{{ updatedAt }}</small></h5>
         
         <p class="mb-1">Wallet Name: {{ name }}</p>
         <p class="mb-1">Coin: {{ coin.name }}</p>

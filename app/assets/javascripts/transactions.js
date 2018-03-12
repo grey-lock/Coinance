@@ -11,8 +11,8 @@ function Transaction(prop) {
   this.fee = prop.fee
   this.quantity = prop.quantity
   this.price_per_coin = prop.price_per_coin
-  this.created_at = prop.created_at
-  this.updated_at = prop.updated_at
+  this.createdAt = prop.created_at
+  this.updatedAt = prop.updated_at
   
 }
 
@@ -67,6 +67,30 @@ Transaction.ready = function() {
   Transaction.template = Handlebars.compile(Transaction.templateSource)
   Transaction.formSubmitListener()
 }
+
+$(function() {
+  $('#sort_tx_fee').on('click', function(e) {
+    e.preventDefault()
+  
+    $.ajax({
+      method: 'GET',
+      url: this.url,
+      dataType: 'json'
+    }).done(function(data) {
+      var transactions = data.txs
+      transactions.sort(function (a, b) {
+         return a.fee > b.fee
+      })
+      // console.log(transactions)
+      var source = $('#tx-list-template').html()
+      var template = Handlebars.compile(source)
+      var context = transactions
+      var html = template(context)
+      $('#load_txs').html(html)
+    })
+    
+  })
+})
 
 //Load a users list of transactions
 $(function() {
